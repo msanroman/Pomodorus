@@ -8,8 +8,8 @@
         android:id="@+id/CrearTascaMain"
         android:layout_width="194dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="120dp"
         android:text="Crear tasca" />
 
     <Button
