@@ -4,9 +4,36 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/CrearTascaMain"
+        android:layout_width="194dp"
         android:layout_height="wrap_content"
-        android:text="@string/hello" />
+        android:layout_gravity="center"
+        android:layout_marginTop="20px"
+        android:text="Crear tasca" />
+
+    <Button
+        android:id="@+id/LlistarTasquesMain"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20px"
+        android:text="Llistar tasques" />
+
+    <Button
+        android:id="@+id/LoginTwitterMain"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20px"
+        android:text="Login Twitter" />
+
+    <Button
+        android:id="@+id/SobreNosaltresMain"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20px"
+        android:text="Sobre nosaltres" />
 
 </LinearLayout>
