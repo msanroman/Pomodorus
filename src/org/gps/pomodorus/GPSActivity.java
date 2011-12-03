@@ -17,5 +17,10 @@ public class GPSActivity extends Activity {
 	public void onCrearTascaClick(View button) {
 			Intent newIntent = new Intent(this, CrearTascaActivity.class);
 			startActivity(newIntent);
-	}   
+	}
+	
+	public void onLogInTwitterClick(View botton) {
+		Intent newIntent = new Intent(this, LogInTwitterActivity.class);
+		startActivity(newIntent);		
+	}
 }

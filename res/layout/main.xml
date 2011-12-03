@@ -19,13 +19,14 @@
         android:layout_gravity="center"
         android:layout_marginTop="20px"
         android:text="Llistar tasques" />
-
+
     <Button
         android:id="@+id/LoginTwitterMain"
         android:layout_width="194dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20px"
+        android:onClick="onLogInTwitterClick"
         android:text="Login Twitter" />
 
     <Button
