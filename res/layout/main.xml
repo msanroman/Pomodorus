@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
+    android:orientation="vertical" >
     <Button
         android:id="@+id/CrearTascaMain"
         android:layout_width="194dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="120dp"
+        android:onClick="onCrearTascaClick"
         android:text="Crear tasca" />
 
     <Button
