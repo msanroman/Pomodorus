@@ -18,6 +18,11 @@ public class GPSActivity extends Activity {
 			Intent newIntent = new Intent(this, CrearTascaActivity.class);
 			startActivity(newIntent);
 	}
+
+	public void onLlistarTasquesClick(View button) {
+		Intent newIntent = new Intent(this, TasksOverviewActivity.class);
+		startActivity(newIntent);
+	}	
 	
 	public void onLogInTwitterClick(View botton) {
 		Intent newIntent = new Intent(this, LogInTwitterActivity.class);
