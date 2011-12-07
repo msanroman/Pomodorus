@@ -5,6 +5,8 @@ import org.gps.databases.TaskDbAdapter;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,6 +24,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 	private static final int ACTIVITY_CREATE = 0;
 	private static final int ACTIVITY_EDIT = 1;
 	private static final int DELETE_ID = Menu.FIRST + 1;
+	private static final CharSequence[] items = { "Modificar", "Esborrar", "Començar Pomodoro" };
 	private Cursor cursor;
 	
 	@Override
@@ -37,13 +40,19 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 		this.getListView().setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				AlertDialog.Builder dialog = new AlertDialog.Builder(view.getContext());
+				AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(view.getContext());
 				dbHelper.open();
 				String name = dbHelper.fetchTask(id).getString(1);
-				dialog.setTitle(name);
 				dbHelper.close();
-				dialog.setMessage("Item selected is: " + name);
-				AlertDialog ad = dialog.create();
+				dialogBuilder.setTitle("Selecciona una de les següents opcions");
+				dialogBuilder.setSingleChoiceItems(items, 0, new OnClickListener() {
+                    
+                    public void onClick(DialogInterface dialog, int item) {
+
+                        Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
+                    }
+                });
+				AlertDialog ad = dialogBuilder.create();
 				ad.show();
 		    }
 		});
