@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,7 +25,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 	private static final int ACTIVITY_CREATE = 0;
 	private static final int ACTIVITY_EDIT = 1;
 	private static final int DELETE_ID = Menu.FIRST + 1;
-	private static final CharSequence[] items = { "Modificar", "Esborrar", "Començar Pomodoro" };
+	private static final CharSequence[] items = { "Veure detall", "Modificar", "Esborrar", "Començar Pomodoro" };
 	private Cursor cursor;
 	
 	@Override
@@ -48,8 +49,23 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 				dialogBuilder.setSingleChoiceItems(items, 0, new OnClickListener() {
                     
                     public void onClick(DialogInterface dialog, int item) {
-
-                        Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
+                        
+                        Intent intent;
+                        switch(item){
+                            case 0:
+                                intent = new Intent(this, TaskDetail.class);
+                                break;
+                            case 1:
+                                intent = new Intent(this, UpdateTask.class);
+                                break;
+                            case 2:
+                                intent = new Intent(this, DeleteTask.class);
+                                break;
+                            case 3:
+                                intent = new Intent(this, StartPomodoro.class);
+                                break;
+                        }
+                        startActivity(intent);
                     }
                 });
 				AlertDialog ad = dialogBuilder.create();
@@ -78,6 +94,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 		// Now create an array adapter and set it to display using our row
 		SimpleCursorAdapter tasks = new SimpleCursorAdapter(this,
 				R.layout.task_row, cursor, from, to);
+		
 		setListAdapter(tasks);
 	}
 
