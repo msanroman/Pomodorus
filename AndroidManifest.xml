@@ -12,6 +12,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="org.gps.pomodorus.TasksOverviewActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity android:name="org.gps.pomodorus.CrearTascaActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity android:name="org.gps.pomodorus.LogInTwitterActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar">
             <intent-filter>
