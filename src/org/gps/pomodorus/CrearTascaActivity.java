@@ -36,10 +36,12 @@ public class CrearTascaActivity extends Activity {
 
 	private void clearAllFields() {
 		
-		for(int field: formFields) {
-			EditText f = (EditText) findViewById(field);
-			f.setText("");
-		}
+//		for(int field: formFields) {
+//			EditText f = (EditText) findViewById(field);
+//			f.setText("");
+//		}
+//		
+		finish();
 	}
 	
 	
