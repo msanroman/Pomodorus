@@ -52,19 +52,19 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                         
                         Intent intent;
                         switch(item){
-//                            case 0:
-//                                intent = new Intent(getBaseContext(), TaskDetail.class);
-//                                break;
-                            default:
+                            case 0:
+                                intent = new Intent(getBaseContext(), TaskDetail.class);
+                                break;
+                            case 1:
                                 intent = new Intent(getBaseContext(), UpdateTask.class);
                                 intent.putExtra("id", id);
                                 break;
-//                            case 2:
-//                                intent = new Intent(getBaseContext(), DeleteTask.class);
-//                                break;
-//                            case 3:
-//                                intent = new Intent(getBaseContext(), StartPomodoro.class);
-//                                break;
+                            case 2:
+                                intent = new Intent(getBaseContext(), DeleteTask.class);
+                                break;
+                            case 3:
+                                intent = new Intent(getBaseContext(), StartPomodoro.class);
+                                break;
                         }
                         startActivity(intent);
                     }
