@@ -13,9 +13,7 @@ public class TaskDetailActivity extends Activity {
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.taskdetail);
-        
-        TextView nom = (TextView)findViewById(R.id.textView1);
+        setContentView(R.layout.taskdetail);  
         Bundle extras = getIntent().getExtras();
         if (extras != null) id = extras.getLong("id");
         
@@ -23,6 +21,14 @@ public class TaskDetailActivity extends Activity {
         dbHelper.open();
         task = dbHelper.fetchTask(id);
         dbHelper.close();
-        nom.setText(task.getString(1));
+        
+	    TextView NomTask = (TextView)findViewById(R.id.NomTasca);
+	    NomTask.setText(task.getString(1));
+	    TextView NumTask = (TextView)findViewById(R.id.NumeroTasca);
+	    NumTask.setText(task.getString(3));
+	    TextView NumRestTask = (TextView)findViewById(R.id.NumeroRestantsTasca);
+	    NumRestTask.setText(task.getString(4));
+	    TextView DescTask = (TextView)findViewById(R.id.DescripcioTasca);
+	    DescTask.setText(task.getString(2));
     }
 }
