@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.Settings.System;
 
 public class TaskDbAdapter {
 
@@ -41,8 +42,8 @@ public class TaskDbAdapter {
 		}
 		
 		public boolean updateTask(long rowId, String name, String description, int pomodoros) {
-			
 			ContentValues values = createContentValues(name, description, pomodoros);
+			values.put(KEY_REMAINING_POMODOROS, pomodoros);
 			return db.update(DB_TABLE, values, KEY_ROWID + "=" + rowId, null) > 0;
 		}
 
