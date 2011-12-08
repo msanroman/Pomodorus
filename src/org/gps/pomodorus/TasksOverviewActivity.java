@@ -39,7 +39,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 		fillData();
 		dbHelper.close();
 		this.getListView().setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, final long id) {
 
 				AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(view.getContext());
 				dbHelper.open();
@@ -52,18 +52,19 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                         
                         Intent intent;
                         switch(item){
-                            case 0:
-                                intent = new Intent(this, TaskDetail.class);
+//                            case 0:
+//                                intent = new Intent(getBaseContext(), TaskDetail.class);
+//                                break;
+                            default:
+                                intent = new Intent(getBaseContext(), UpdateTask.class);
+                                intent.putExtra("id", id);
                                 break;
-                            case 1:
-                                intent = new Intent(this, UpdateTask.class);
-                                break;
-                            case 2:
-                                intent = new Intent(this, DeleteTask.class);
-                                break;
-                            case 3:
-                                intent = new Intent(this, StartPomodoro.class);
-                                break;
+//                            case 2:
+//                                intent = new Intent(getBaseContext(), DeleteTask.class);
+//                                break;
+//                            case 3:
+//                                intent = new Intent(getBaseContext(), StartPomodoro.class);
+//                                break;
                         }
                         startActivity(intent);
                     }
