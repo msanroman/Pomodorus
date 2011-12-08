@@ -5,6 +5,7 @@ import org.gps.databases.TaskDbAdapter;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -39,7 +40,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 		fillData();
 		dbHelper.close();
 		this.getListView().setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, final long id) {
 
 				AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(view.getContext());
 				dbHelper.open();
@@ -49,13 +50,13 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 				dialogBuilder.setSingleChoiceItems(items, 0, new OnClickListener() {
                     
                     public void onClick(DialogInterface dialog, int item) {
-                        
-                        Intent intent;
+                        Intent intent = null;
                         switch(item){
                             case 0:
-                                intent = new Intent(this, TaskDetail.class);
+                                intent = new Intent(getBaseContext(), TaskDetailActivity.class);
+                                intent.putExtra("id", id);
                                 break;
-                            case 1:
+                            /*case 1:
                                 intent = new Intent(this, UpdateTask.class);
                                 break;
                             case 2:
@@ -63,7 +64,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                                 break;
                             case 3:
                                 intent = new Intent(this, StartPomodoro.class);
-                                break;
+                                break;*/
                         }
                         startActivity(intent);
                     }
@@ -105,5 +106,4 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 		dialog.setTitle(dbHelper.fetchTask(id).getString(1));
 		dialog.setContentView(R.layout.help);
 	}
-
 }
