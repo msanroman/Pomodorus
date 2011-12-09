@@ -47,7 +47,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 				String name = dbHelper.fetchTask(id).getString(1);
 				dbHelper.close();
 				dialogBuilder.setTitle("Selecciona una de les següents opcions");
-				dialogBuilder.setSingleChoiceItems(items, 0, new OnClickListener() {
+				dialogBuilder.setItems(items, new OnClickListener() {
                     
                     public void onClick(DialogInterface dialog, int item) {
                     	
@@ -56,17 +56,21 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                             case 0:
                                 intent = new Intent(getBaseContext(), TaskDetailActivity.class);
                                 intent.putExtra("id", id);
+                                finish();
                                 break;
                             case 1:
                                 intent = new Intent(getBaseContext(), UpdateTask.class);
                                 intent.putExtra("id", id);
+                                finish();
                                 break;
-                            case 2:
-                                intent = new Intent(getBaseContext(), DeleteTask.class);
-                                break;
-                            case 3:
-                                intent = new Intent(getBaseContext(), StartPomodoro.class);
-                                break;
+//                            case 2:
+//                                intent = new Intent(getBaseContext(), DeleteTask.class);
+//                                finish();
+//                                break;
+//                            case 3:
+//                                intent = new Intent(getBaseContext(), StartPomodoro.class);
+//                                finish();
+//                                break;
                         }
                         startActivity(intent);
                     }
