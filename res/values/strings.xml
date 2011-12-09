@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, Todo!</string>
     <string name="app_name">Pomodorus</string>
-    <string name="no_todos">Currently there are no Todo items maintained</string>
+    <string name="no_todos">Currently there are no tasks in your database</string>
     <string name="menu_insert">Add Item</string>
     <string name="menu_delete">Delete Todo</string>
     <string name="todo_summary">Summary</string>

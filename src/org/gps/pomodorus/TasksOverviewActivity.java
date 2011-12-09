@@ -26,8 +26,9 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 	private static final int ACTIVITY_CREATE = 0;
 	private static final int ACTIVITY_EDIT = 1;
 	private static final int DELETE_ID = Menu.FIRST + 1;
-	private static final CharSequence[] items = { "Veure detall", "Modificar", "Esborrar", "Començar Pomodoro" };
+	private static final CharSequence[] items = { "Veure detall", "Modificar", "Esborrar", "ComenÃ§ar Pomodoro" };
 	private Cursor cursor;
+	protected Cursor task;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,14 +45,20 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 
 				AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(view.getContext());
 				dbHelper.open();
-				String name = dbHelper.fetchTask(id).getString(1);
+				task = dbHelper.fetchTask(id);
 				dbHelper.close();
-				dialogBuilder.setTitle("Selecciona una de les següents opcions");
+				dialogBuilder.setTitle("Selecciona una de les segÃ¼ents opcions");
 				dialogBuilder.setSingleChoiceItems(items, 0, new OnClickListener() {
                     
                     public void onClick(DialogInterface dialog, int item) {
                     	
                         Intent intent = null;
+                        Bundle bundle = new Bundle();
+                        bundle.putLong("id", task.getLong(0));
+                        bundle.putCharSequence("name", task.getString(1));
+                        bundle.putCharSequence("description", task.getString(2));
+                        bundle.putInt("totalPomodoros", task.getInt(3));
+                        bundle.putInt("remainingPomodoros", task.getInt(4));
                         switch(item){
                             case 0:
                                 intent = new Intent(getBaseContext(), TaskDetailActivity.class);
@@ -61,11 +68,12 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                                 intent = new Intent(getBaseContext(), UpdateTask.class);
                                 intent.putExtra("id", id);
                                 break;
-                            case 2:
-                                intent = new Intent(getBaseContext(), DeleteTask.class);
-                                break;
+//                            case 2:
+//                                intent = new Intent(getBaseContext(), DeleteTask.class);
+//                                break;
                             case 3:
-                                intent = new Intent(getBaseContext(), StartPomodoro.class);
+                                intent = new Intent(getBaseContext(), PomodoroActivity.class);
+                                intent.putExtras(bundle);
                                 break;
                         }
                         startActivity(intent);
