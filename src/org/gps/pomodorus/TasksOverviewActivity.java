@@ -56,23 +56,42 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                             case 0:
                                 intent = new Intent(getBaseContext(), TaskDetailActivity.class);
                                 intent.putExtra("id", id);
+                                startActivity(intent);
                                 finish();
                                 break;
                             case 1:
                                 intent = new Intent(getBaseContext(), UpdateTask.class);
                                 intent.putExtra("id", id);
+                                startActivity(intent);
                                 finish();
                                 break;
-//                            case 2:
-//                                intent = new Intent(getBaseContext(), DeleteTask.class);
-//                                finish();
-//                                break;
-//                            case 3:
-//                                intent = new Intent(getBaseContext(), StartPomodoro.class);
-//                                finish();
-//                                break;
+                            case 2:
+                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(TasksOverviewActivity.this);
+                            	builderBorrar.setIcon(R.drawable.alert_dialog_icon)
+                            	.setTitle("Segur que desitges eliminar la tasca?")   
+                            	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
+                            		public void onClick(DialogInterface dialog, int whichButton) {
+                            			dbHelper.open();
+                            			dbHelper.deleteTask(id);
+                        				dbHelper.close();
+                            			finish();
+                            		}
+                            	})
+                            	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
+                            		public void onClick(DialogInterface dialog, int whichButton) {
+                            			/* nada */
+                            		}
+                            	});
+                            	AlertDialog BorrarDialog = builderBorrar.create();
+                            	BorrarDialog.show();
+                                
+                                break;
+                            case 3:
+                                intent = new Intent(getBaseContext(), StartPomodoro.class);
+                                finish();
+                                break;
                         }
-                        startActivity(intent);
+                        
                     }
                 });
 				AlertDialog ad = dialogBuilder.create();

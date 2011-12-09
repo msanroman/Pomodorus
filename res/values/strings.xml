@@ -12,4 +12,5 @@
     <string name="todo_edit_confirm">Confirm</string>
     <color name="listcolor">#FFE87C</color>
     <color name="black">#000000</color>
+    <string name="confirmation_delete">Segur que desitges eliminar la tasca?</string>
 </resources>
