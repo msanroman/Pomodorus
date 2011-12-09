@@ -1,7 +1,5 @@
 package org.gps.pomodorus;
 
-import java.util.ArrayList;
-
 import org.gps.databases.TaskDbAdapter;
 
 import android.app.Activity;
@@ -168,23 +166,17 @@ public class PomodoroActivity extends Activity implements android.view.View.OnCl
     
     private void showPomoExtenderDialog() {
 
-    	Toast toast = new Toast(PomodoroActivity.this);
-        toast.setText("Not implemented yet.");
-        toast.show();
+        Toast.makeText(PomodoroActivity.this,"Not implemented yet.", 1).show();
     }
 
     protected void showTweetDialog() {
 
-        Toast toast = new Toast(PomodoroActivity.this);
-        toast.setText("Not implemented yet.");
-        toast.show();
+        Toast.makeText(PomodoroActivity.this,"Not implemented yet.", 1).show();
     }
 
     private void showBreakDialog() {
         
-        Toast toast = new Toast(PomodoroActivity.this);
-        toast.setText("Not implemented yet.");
-        toast.show();
+    	Toast.makeText(PomodoroActivity.this,"Not implemented yet.", 1).show();
     }
 
     public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
