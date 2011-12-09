@@ -22,5 +22,6 @@
         </activity>    
         <activity android:name="org.gps.pomodorus.UpdateTask" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity android:name="org.gps.pomodorus.TaskDetailActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
-    </application>
+        <activity android:name="org.gps.pomodorus.PomodoroActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
+	</application>
 </manifest>

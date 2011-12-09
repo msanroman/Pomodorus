@@ -79,6 +79,13 @@ public class TaskDbAdapter {
 			return values;
 		}
 
+        public boolean updateTask(long id, String name, String description,
+                int totalPomodoros, int remainingPomodoros) {
+
+            ContentValues values = createContentValues(name, description, totalPomodoros);
+            values.put(KEY_REMAINING_POMODOROS, remainingPomodoros);
+            return db.update(DB_TABLE, values, KEY_ROWID + "=" + id, null) > 0;            
+        }
 
 	
 }
