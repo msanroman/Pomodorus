@@ -53,17 +53,12 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
                         bundle.putCharSequence("name", category.getString(1));
                         switch(item){
                             case 0:
-//                                intent = new Intent(getBaseContext(), TaskDetailActivity.class);
-//                                intent.putExtra("id", id);
-//                                startActivity(intent);
-//                                break;
+                              intent = new Intent(getBaseContext(), UpdateCategory.class);
+                              intent.putExtra("id", id);
+                              startActivity(intent);
+                              finish();
+                              break;
                             case 1:
-//                                intent = new Intent(getBaseContext(), UpdateTask.class);
-//                                intent.putExtra("id", id);
-//                                startActivity(intent);
-//                                finish();
-//                                break;
-                            case 2:
                             	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(CategoriesOverviewActivity.this);
                             	builderBorrar.setIcon(R.drawable.alert_dialog_icon)
                             	.setTitle("Segur que desitges eliminar la categoria?")   
@@ -84,6 +79,11 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
                             	AlertDialog BorrarDialog = builderBorrar.create();
                             	BorrarDialog.show();
                             	break;
+                            case 2:
+//                                intent = new Intent(getBaseContext(), TaskDetailActivity.class);
+//                                intent.putExtra("id", id);
+//                                startActivity(intent);
+//                                break;
                         }
                         
                     }

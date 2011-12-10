@@ -48,7 +48,6 @@ public class UpdateTask extends Activity {
 		String nomTasca = ((EditText) findViewById(formFields[NOM])).getText().toString();
 		String descripcioTasca = ((EditText) findViewById(formFields[DESCRIPCIO])).getText().toString();
 		int pomodoros = Integer.valueOf(((EditText) findViewById(formFields[NUMERO])).getText().toString());
-		System.out.print(id);
 		database.updateTask(id, nomTasca, descripcioTasca, pomodoros);
 		database.close();
 		clearAllFields();
