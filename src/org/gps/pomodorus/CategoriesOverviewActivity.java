@@ -48,44 +48,44 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
                     
                     public void onClick(DialogInterface dialog, int item) {
                     	
-//                        Intent intent = null;
-//                        Bundle bundle = new Bundle();
-//                        bundle.putLong("id", category.getLong(0));
-//                        bundle.putCharSequence("name", category.getString(1));
-//                        switch(item){
-//                            case 0:
+                        Intent intent = null;
+                        Bundle bundle = new Bundle();
+                        bundle.putLong("id", category.getLong(0));
+                        bundle.putCharSequence("name", category.getString(1));
+                        switch(item){
+                            case 0:
+                              intent = new Intent(getBaseContext(), UpdateCategory.class);
+                              intent.putExtra("id", id);
+                              startActivity(intent);
+                              finish();
+                              break;
+                            case 1:
+                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(CategoriesOverviewActivity.this);
+                            	builderBorrar.setIcon(R.drawable.alert_dialog_icon)
+                            	.setTitle("Segur que desitges eliminar la categoria?")   
+                            	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
+                            		
+                            		public void onClick(DialogInterface dialog, int whichButton) {
+                            			dbHelper.open();
+                            			dbHelper.deleteCategory(id);
+                        				dbHelper.close();
+                            			finish();
+                            		}
+                            	})
+                            	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
+                            		public void onClick(DialogInterface dialog, int whichButton) {
+                            			/* nada */
+                            		}
+                            	});
+                            	AlertDialog BorrarDialog = builderBorrar.create();
+                            	BorrarDialog.show();
+                            	break;
+                            case 2:
 //                                intent = new Intent(getBaseContext(), TaskDetailActivity.class);
 //                                intent.putExtra("id", id);
 //                                startActivity(intent);
 //                                break;
-//                            case 1:
-//                                intent = new Intent(getBaseContext(), UpdateTask.class);
-//                                intent.putExtra("id", id);
-//                                startActivity(intent);
-//                                finish();
-//                                break;
-//                            case 2:
-//                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(CategoriesOverviewActivity.this);
-//                            	builderBorrar.setIcon(R.drawable.alert_dialog_icon)
-//                            	.setTitle("Segur que desitges eliminar la tasca?")   
-//                            	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
-//                            		
-//                            		public void onClick(DialogInterface dialog, int whichButton) {
-//                            			dbHelper.open();
-//                            			dbHelper.deleteTask(id);
-//                        				dbHelper.close();
-//                            			finish();
-//                            		}
-//                            	})
-//                            	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
-//                            		public void onClick(DialogInterface dialog, int whichButton) {
-//                            			/* nada */
-//                            		}
-//                            	});
-//                            	AlertDialog BorrarDialog = builderBorrar.create();
-//                            	BorrarDialog.show();
-//                            	break;
-//                        }
+                        }
                         
                     }
                 });

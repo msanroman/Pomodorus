@@ -2,58 +2,120 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
-    <Button
-        android:id="@+id/CrearTascaMain"
-        android:layout_width="194dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
-        android:onClick="onCrearTascaClick"
-        android:text="Crear tasca" />
-
-    <Button
-        android:id="@+id/CrearCategoriaMain"
-        android:layout_width="194dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20px"
-        android:onClick="onCrearCategoriaClick"
-        android:text="Crear categoria" />
-    
-    <Button
-        android:id="@+id/LlistarTasquesMain"
-        android:layout_width="194dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20px"
-        android:onClick="onLlistarTasquesClick"
-        android:text="Llistar tasques" />
-    
-    <Button
-        android:id="@+id/LlistarCategoriesMain"
-        android:layout_width="194dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20px"
-        android:onClick="onLlistarCategoriesClick"
-        android:text="Llistar Categories" />
+    android:orientation="vertical" 
+    android:background="@drawable/radialback" >
 
-    <Button
-        android:id="@+id/LoginTwitterMain"
-        android:layout_width="194dp"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20px"
-        android:onClick="onLogInTwitterClick"
-        android:text="Login Twitter" />
-
-    <Button
-        android:id="@+id/SobreNosaltresMain"
-        android:layout_width="194dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+	    
+        <ImageView 
+		   android:id="@+id/titleImage"
+		   android:src="@drawable/title"
+		   android:layout_width="wrap_content"
+		   android:layout_height="wrap_content" />
+	    
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/GestioTasques"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20px"
-        android:text="Sobre nosaltres" />
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:text="Gestió Tasques"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+	    
+	    <Button
+	        android:id="@+id/CrearTascaMain"
+	        android:layout_width="125dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginTop="10dp"
+	        android:onClick="onCrearTascaClick"
+	        android:text="Crear tasca" />
+	
+	    <Button
+	        android:id="@+id/LlistarTasquesMain"
+	        android:layout_width="140dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginTop="10dp"
+	        android:onClick="onLlistarTasquesClick"
+	        android:text="Llistar tasques" />
+	    </LinearLayout>
 
+    <TextView
+        android:id="@+id/GestioCategories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:text="Gestió Categories"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+	    
+	    <Button
+	        android:id="@+id/CrearCategoriaMain"
+	        android:layout_width="125dp"
+	        android:layout_height="wrap_content"
+			android:layout_marginLeft="20dp"
+	        android:layout_marginTop="10dp"
+	        android:onClick="onCrearCategoriaClick"
+	        android:text="Crear categoria" />
+	    
+	    
+	    <Button
+	        android:id="@+id/LlistarCategoriesMain"
+	        android:layout_width="140dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginTop="10dp"
+	        android:onClick="onLlistarCategoriesClick"
+	        android:text="Llistar Categories" />
+	</LinearLayout>
+    <TextView
+        android:id="@+id/Social"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:text="Social"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+        
+	    <Button
+	        android:id="@+id/LoginTwitterMain"
+	        android:layout_width="125dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginTop="10dp"
+	        android:onClick="onLogInTwitterClick"
+	        android:text="Login Twitter" />
+	
+	    <Button
+	        android:id="@+id/SobreNosaltresMain"
+	        android:layout_width="140dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginTop="10dp"
+	        android:text="Sobre nosaltres" />
+	</LinearLayout>
 </LinearLayout>
