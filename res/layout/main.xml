@@ -8,7 +8,7 @@
         android:layout_width="194dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="90dp"
         android:onClick="onCrearTascaClick"
         android:text="Crear tasca" />
 
@@ -20,6 +20,15 @@
         android:layout_marginTop="20px"
         android:onClick="onLlistarTasquesClick"
         android:text="Llistar tasques" />
+    
+    <Button
+        android:id="@+id/LlistarCategoriesMain"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20px"
+        android:onClick="onLlistarCategoriesClick"
+        android:text="Llistar Categories" />
 
     <Button
         android:id="@+id/LoginTwitterMain"
