@@ -5,6 +5,7 @@ import org.gps.databases.TaskDbAdapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -146,7 +147,10 @@ public class PomodoroActivity extends Activity implements android.view.View.OnCl
                     
                     switch(item) {
                         case 0:
-                            showTweetDialog();
+                        	Intent intent = new Intent(getBaseContext(), TweetPomodoro.class);
+                        	intent.putExtra("name", name);
+                        	intent.putExtra("pomoactual", totalPomodoros-remainingPomodoros);
+                        	startActivity(intent);
                             break;
                         case 1:
                             showBreakDialog();
@@ -165,11 +169,6 @@ public class PomodoroActivity extends Activity implements android.view.View.OnCl
     };
     
     private void showPomoExtenderDialog() {
-
-        Toast.makeText(PomodoroActivity.this,"Not implemented yet.", 1).show();
-    }
-
-    protected void showTweetDialog() {
 
         Toast.makeText(PomodoroActivity.this,"Not implemented yet.", 1).show();
     }

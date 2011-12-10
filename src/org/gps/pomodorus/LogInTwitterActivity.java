@@ -5,6 +5,7 @@ import org.gps.twitter.AppTwitter;
 import twitter4j.TwitterException;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -50,6 +51,17 @@ public class LogInTwitterActivity extends Activity{
         web = (WebView)findViewById(R.id.webView);
         web.requestFocus(View.FOCUS_DOWN);
         web.setWebViewClient(new WebTwitterClient());
+        web.setOnTouchListener(new View.OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_UP:
+                        if (!v.hasFocus()) v.requestFocus();
+                        break;
+                }
+                return false;
+			}
+		});
         if (!AppTwitter.Conectat()) {
         	AppTwitter.Configurar(ConsumerKey, ConsumerSecret, CallBackUrl);
             usuariTwitter.setText("");
