@@ -1,7 +1,6 @@
 package org.gps.pomodorus;
 
 import org.gps.databases.CategoryDbAdapter;
-import org.gps.databases.CategoryTable;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

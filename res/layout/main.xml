@@ -8,10 +8,19 @@
         android:layout_width="194dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="60dp"
         android:onClick="onCrearTascaClick"
         android:text="Crear tasca" />
 
+    <Button
+        android:id="@+id/CrearCategoriaMain"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20px"
+        android:onClick="onCrearCategoriaClick"
+        android:text="Crear categoria" />
+    
     <Button
         android:id="@+id/LlistarTasquesMain"
         android:layout_width="194dp"

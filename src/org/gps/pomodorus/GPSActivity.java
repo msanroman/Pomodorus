@@ -19,7 +19,13 @@ public class GPSActivity extends Activity {
         Intent newIntent = new Intent(this, CrearTascaActivity.class);
         startActivity(newIntent);
     }
+    
+    public void onCrearCategoriaClick(View button) {
 
+        Intent newIntent = new Intent(this, CrearCategoriaActivity.class);
+        startActivity(newIntent);
+    }
+    
     public void onLlistarTasquesClick(View button) {
 
         Intent newIntent = new Intent(this, TasksOverviewActivity.class);
