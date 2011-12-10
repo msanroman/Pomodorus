@@ -20,9 +20,6 @@ import android.widget.SimpleCursorAdapter;
 public class TasksOverviewActivity extends ListActivity implements OnItemClickListener{
 
 	private TaskDbAdapter dbHelper;
-	private static final int ACTIVITY_CREATE = 0;
-	private static final int ACTIVITY_EDIT = 1;
-	private static final int DELETE_ID = Menu.FIRST + 1;
 	private static final CharSequence[] items = { "Veure detall", "Modificar", "Esborrar", "Començar Pomodoro" };
 	private Cursor cursor;
 	protected Cursor task;
@@ -62,7 +59,6 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                                 intent = new Intent(getBaseContext(), TaskDetailActivity.class);
                                 intent.putExtra("id", id);
                                 startActivity(intent);
-                                finish();
                                 break;
                             case 1:
                                 intent = new Intent(getBaseContext(), UpdateTask.class);
