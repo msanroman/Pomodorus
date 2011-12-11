@@ -2,28 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
-    <TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content" android:layout_height="match_parent" android:visibility="visible">
+    <TableRow 
+        android:id="@+id/tableRow1" 
+        android:layout_width="wrap_content" 
+        android:layout_height="match_parent" 
+        android:visibility="visible"
+        android:layout_marginTop="5px"
+        android:layout_marginBottom="8px" >
+        
         <TextView
             android:id="@+id/taskName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6px"
-            android:lines="1"
-            android:text="@+id/TextView01"
-            android:textColor="@color/black"
-            android:textSize="40px" />
-        <TextView
-            android:id="@+id/taskRemainingPomodoros"
             android:layout_width="72dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6px"
             android:lines="1"
             android:text="@+id/TextView01"
             android:textColor="@color/black"
-            android:textSize="40px" />
-        <TextView android:id="@+id/taskTotalPomodoros" android:layout_width="fill_parent" android:layout_height="wrap_content" 
-            android:layout_marginTop="6px" android:lines="1" android:text="@+id/TextView01" 
-            android:textColor="@color/black" android:textSize="40px"/>
+            android:textSize="30px" />
+        <TextView
+            android:id="@+id/taskRemainingPomodoros"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6px"
+            android:layout_marginLeft="130px"
+            android:lines="1"
+            android:text="@+id/TextView01"
+            android:textColor="@color/black"
+            android:textSize="30px" />
+        <TextView 
+            android:id="@+id/taskTotalPomodoros" 
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="6px" 
+            android:layout_marginLeft="30px"
+            android:lines="1" android:text="@+id/TextView01" 
+            android:textColor="@color/black" 
+            android:textSize="30px"/>
     
     </TableRow>
 
