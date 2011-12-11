@@ -67,12 +67,10 @@ public class CrearTascaActivity extends Activity {
 		options = new String[cat.getCount()];
 		id_options = new long[options.length];
 		selections = new boolean[options.length];
-		int i = 0;
 		cat.moveToFirst();
-		while (!cat.isAfterLast()) {
+		for (int i = 0; !cat.isAfterLast(); ++i) {
 			id_options[i] = cat.getLong(0);
 			options[i] = cat.getString(1);
-			++i;
 			cat.moveToNext();
 		}
 	}

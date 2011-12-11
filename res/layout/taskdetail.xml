@@ -67,4 +67,21 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Categories Assignades: "
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/Categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 </LinearLayout>
