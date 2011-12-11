@@ -1,5 +1,6 @@
 package org.gps.pomodorus;
 
+import org.gps.databases.CatTaskDbAdapter;
 import org.gps.databases.TaskDbAdapter;
 
 import android.app.AlertDialog;
@@ -20,6 +21,7 @@ import android.widget.SimpleCursorAdapter;
 public class TasksOverviewActivity extends ListActivity implements OnItemClickListener{
 
 	private TaskDbAdapter dbHelper;
+	private CatTaskDbAdapter dbCatTaskHelper;
 	private static final CharSequence[] items = { "Veure detall", "Modificar", "Esborrar", "Començar Pomodoro" };
 	private Cursor cursor;
 	protected Cursor task;
@@ -31,6 +33,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 		setContentView(R.layout.task_list);
 		this.getListView().setDividerHeight(2);
 		dbHelper = new TaskDbAdapter(this);
+		dbCatTaskHelper = new CatTaskDbAdapter(this);
 		dbHelper.open();
 		fillData();
 		dbHelper.close();
@@ -76,6 +79,9 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                             			dbHelper.open();
                             			dbHelper.deleteTask(id);
                         				dbHelper.close();
+                        				dbCatTaskHelper.open();
+                        				dbCatTaskHelper.deleteTask(id);
+                        				dbCatTaskHelper.close();
                             			finish();
                             		}
                             	})

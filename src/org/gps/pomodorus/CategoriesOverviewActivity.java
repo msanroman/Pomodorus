@@ -1,5 +1,6 @@
 package org.gps.pomodorus;
 
+import org.gps.databases.CatTaskDbAdapter;
 import org.gps.databases.CategoryDbAdapter;
 
 import android.app.AlertDialog;
@@ -21,6 +22,7 @@ import android.widget.SimpleCursorAdapter;
 public class CategoriesOverviewActivity extends ListActivity implements OnItemClickListener{
 
 	private CategoryDbAdapter dbHelper;
+	private CatTaskDbAdapter dbCatTaskHelper;
 	private static final CharSequence[] items = { "Editar categoria", "Borrar categoria", "Llistar tasques assignades a la categoria" };
 	private Cursor cursor;
 	protected Cursor category;
@@ -32,6 +34,7 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
 		setContentView(R.layout.category_list);
 		this.getListView().setDividerHeight(2);
 		dbHelper = new CategoryDbAdapter(this);
+		dbCatTaskHelper = new CatTaskDbAdapter(this);
 		dbHelper.open();
 		fillData();
 		dbHelper.close();
@@ -69,6 +72,9 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
                             			dbHelper.open();
                             			dbHelper.deleteCategory(id);
                         				dbHelper.close();
+                        				dbCatTaskHelper.open();
+                        				dbCatTaskHelper.deleteCat(id);
+                        				dbCatTaskHelper.close();
                             			finish();
                             		}
                             	})
