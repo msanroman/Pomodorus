@@ -40,6 +40,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="20dp"
 	        android:layout_marginTop="10dp"
+	        android:background="@drawable/fancy_button"
 	        android:onClick="onCrearTascaClick"
 	        android:text="Crear tasca" />
 	
@@ -49,6 +50,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="10dp"
 	        android:layout_marginTop="10dp"
+	        android:background="@drawable/fancy_button"
 	        android:onClick="onLlistarTasquesClick"
 	        android:text="Llistar tasques" />
 	    </LinearLayout>
@@ -74,6 +76,7 @@
 	        android:layout_height="wrap_content"
 			android:layout_marginLeft="20dp"
 	        android:layout_marginTop="10dp"
+	        android:background="@drawable/fancy_button"
 	        android:onClick="onCrearCategoriaClick"
 	        android:text="Crear categoria" />
 	    
@@ -84,6 +87,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="10dp"
 	        android:layout_marginTop="10dp"
+	        android:background="@drawable/fancy_button"
 	        android:onClick="onLlistarCategoriesClick"
 	        android:text="Llistar Categories" />
 	</LinearLayout>
@@ -107,6 +111,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="20dp"
 	        android:layout_marginTop="10dp"
+	        android:background="@drawable/fancy_button"
 	        android:onClick="onLogInTwitterClick"
 	        android:text="Login Twitter" />
 	
@@ -116,6 +121,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="10dp"
 	        android:layout_marginTop="10dp"
+	        android:background="@drawable/fancy_button"
 	        android:text="Sobre nosaltres" />
 	</LinearLayout>
 </LinearLayout>
