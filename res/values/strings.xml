@@ -10,7 +10,7 @@
     <string name="todo_edit_summary">Summary</string>
     <string name="todo_edit_description">Description</string>
     <string name="todo_edit_confirm">Confirm</string>
-    <color name="listcolor">#FFE87C</color>
+    <color name="listcolor">#fb811f</color>
     <color name="black">#000000</color>
     <string name="confirmation_delete">Segur que desitges eliminar la tasca?</string>
 </resources>

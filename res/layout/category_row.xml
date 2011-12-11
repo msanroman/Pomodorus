@@ -2,7 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
-    <TableRow android:id="@+id/tableRowCat" android:layout_width="wrap_content" android:layout_height="match_parent" android:visibility="visible">
+    <TableRow 
+        android:id="@+id/tableRowCat" 
+        android:layout_width="wrap_content" 
+        android:layout_height="match_parent" 
+        android:visibility="visible"
+        android:layout_marginTop="5px"
+        android:layout_marginBottom="8px" >
+        
         <TextView
             android:id="@+id/categoryName"
             android:layout_width="wrap_content"
@@ -11,7 +18,7 @@
             android:lines="1"
             android:text="@+id/TextViewCat"
             android:textColor="@color/black"
-            android:textSize="40px" />
+            android:textSize="30px" />
     </TableRow>
 
 </LinearLayout>
