@@ -1,7 +1,7 @@
 package org.gps.pomodorus;
 
 import org.gps.databases.CatTaskDbAdapter;
-import org.gps.databases.CategoryDbAdapter;
+import org.gps.databases.TaskDbAdapter;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,25 +15,24 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SimpleCursorAdapter;
 
-public class CategoriesOverviewActivity extends ListActivity implements OnItemClickListener{
+public class CatTaskOverviewActivity extends ListActivity implements OnItemClickListener{
 
-	private CategoryDbAdapter dbHelper;
+	private TaskDbAdapter dbHelper;
 	private CatTaskDbAdapter dbCatTaskHelper;
-	private static final CharSequence[] items = { "Editar categoria", "Borrar categoria", "Llistar tasques assignades a la categoria" };
+	private static final CharSequence[] items = { "Veure detall", "Modificar", "Esborrar", "Començar Pomodoro" };
 	private Cursor cursor;
-	protected Cursor category;
+	protected Cursor task;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.category_list);
+		setContentView(R.layout.task_list);
 		this.getListView().setDividerHeight(2);
-		dbHelper = new CategoryDbAdapter(this);
+		dbHelper = new TaskDbAdapter(this);
 		dbCatTaskHelper = new CatTaskDbAdapter(this);
 		dbHelper.open();
 		fillData();
@@ -43,7 +42,7 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
 
 				AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(view.getContext());
 				dbHelper.open();
-				category = dbHelper.fetchCategory(id);
+				task = dbHelper.fetchTask(id);
 				dbHelper.close();
 
 				dialogBuilder.setTitle("Selecciona una de les següents opcions");
@@ -53,27 +52,35 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
                     	
                         Intent intent = null;
                         Bundle bundle = new Bundle();
-                        bundle.putLong("id", category.getLong(0));
-                        bundle.putCharSequence("name", category.getString(1));
+                        bundle.putLong("id", task.getLong(0));
+                        bundle.putCharSequence("name", task.getString(1));
+                        bundle.putCharSequence("description", task.getString(2));
+                        bundle.putInt("totalPomodoros", task.getInt(3));
+                        bundle.putInt("remainingPomodoros", task.getInt(4));
                         switch(item){
                             case 0:
-                              intent = new Intent(getBaseContext(), UpdateCategory.class);
-                              intent.putExtra("id", id);
-                              startActivity(intent);
-                              finish();
-                              break;
+                                intent = new Intent(getBaseContext(), TaskDetailActivity.class);
+                                intent.putExtra("id", id);
+                                startActivity(intent);
+                                break;
                             case 1:
-                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(CategoriesOverviewActivity.this);
+                                intent = new Intent(getBaseContext(), UpdateTask.class);
+                                intent.putExtra("id", id);
+                                startActivity(intent);
+                                finish();
+                                break;
+                            case 2:
+                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(CatTaskOverviewActivity.this);
                             	builderBorrar.setIcon(R.drawable.alert_dialog_icon)
-                            	.setTitle("Segur que desitges eliminar la categoria?")   
+                            	.setTitle("Segur que desitges eliminar la tasca?")   
                             	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
                             		
                             		public void onClick(DialogInterface dialog, int whichButton) {
                             			dbHelper.open();
-                            			dbHelper.deleteCategory(id);
+                            			dbHelper.deleteTask(id);
                         				dbHelper.close();
                         				dbCatTaskHelper.open();
-                        				dbCatTaskHelper.deleteCat(id);
+                        				dbCatTaskHelper.deleteTask(id);
                         				dbCatTaskHelper.close();
                             			finish();
                             		}
@@ -86,11 +93,11 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
                             	AlertDialog BorrarDialog = builderBorrar.create();
                             	BorrarDialog.show();
                             	break;
-                            case 2:
-                                intent = new Intent(getBaseContext(), CatTaskOverviewActivity.class);
-                                intent.putExtra("id", id);
-                                startActivity(intent);
-                                finish();
+                            case 3:
+                            	intent = new Intent(getBaseContext(), PomodoroActivity.class);
+                            	intent.putExtras(bundle);
+                            	startActivity(intent);
+                            	finish();
                                 break;
                         }
                         
@@ -114,23 +121,22 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
 	
 	private void fillData() {
 
-		cursor = dbHelper.fetchAllCategories();
+		cursor = dbHelper.fetchAllTasks();
 		startManagingCursor(cursor);
-		String[] from = new String[] { CategoryDbAdapter.KEY_NAME };
-		int[] to = new int[] { R.id.categoryName };
-
+		String[] from = new String[] { TaskDbAdapter.KEY_NAME, TaskDbAdapter.KEY_REMAINING_POMODOROS, TaskDbAdapter.KEY_TOTAL_POMODOROS };
+		int[] to = new int[] { R.id.taskName, R.id.taskRemainingPomodoros, R.id.taskTotalPomodoros };
 		// Now create an array adapter and set it to display using our row
-		SimpleCursorAdapter categories = new SimpleCursorAdapter(this,
-				R.layout.category_row, cursor, from, to);
+		SimpleCursorAdapter tasks = new SimpleCursorAdapter(this,
+				R.layout.task_row, cursor, from, to);
 		
-		setListAdapter(categories);
+		setListAdapter(tasks);
 	}
 
 
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		
 		Dialog dialog = new Dialog(this);
-		dialog.setTitle(dbHelper.fetchCategory(id).getString(1));
+		dialog.setTitle(dbHelper.fetchTask(id).getString(1));
 		dialog.setContentView(R.layout.help);
 	}
 }
