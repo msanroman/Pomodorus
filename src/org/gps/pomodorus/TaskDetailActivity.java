@@ -14,36 +14,28 @@ public class TaskDetailActivity extends Activity {
 	private CategoryDbAdapter dbCat;
 	private long id;
 	private Cursor task;
-	private Cursor CatTask;
+	private Cursor cat;
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.taskdetail);  
         Bundle extras = getIntent().getExtras();
         if (extras != null) id = extras.getLong("id");
-        
         dbHelper = new TaskDbAdapter(this);
+        dbCat = new CategoryDbAdapter(this);
+        dbCatTask = new CatTaskDbAdapter(this);
         dbHelper.open();
         task = dbHelper.fetchTask(id);
         dbHelper.close();
-        
-        dbCatTask = new CatTaskDbAdapter(this);
         dbCatTask.open();
-        CatTask = dbCatTask.fetchTask(id);
-        long[] category = new long[CatTask.getCount()];
-        CatTask.moveToFirst();
-        for (int i = 0; !CatTask.isAfterLast(); ++i) {
-        	category[i] = CatTask.getLong(1);
-        	CatTask.moveToNext();
-        }
+        long[] rowid_cat = dbCatTask.fetchCat(id);
         dbCatTask.close();
-  
-	    String Categories_aux = "";;
-        dbCat = new CategoryDbAdapter(this);
         dbCat.open();
-        for (int i = 0; i < category.length; ++i) {
-        	Categories_aux += dbCat.fetchCategory(category[i]).getString(1);
-        	if (i != category.length - 1) Categories_aux += ", ";
+        cat = dbCat.fetchCategories(rowid_cat);
+        String Categories_aux = "";
+        for (cat.moveToFirst(); !cat.isAfterLast(); cat.moveToNext()) {
+        	Categories_aux += cat.getString(1);
+        	if (!cat.isLast()) Categories_aux += ", ";
         }
         dbCat.close();
         

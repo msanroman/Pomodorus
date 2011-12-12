@@ -50,6 +50,13 @@ public class CategoryDbAdapter {
 			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME }, null, null, null, null, null);
 		}
 		
+		public Cursor fetchCategories(long[] rowId) {
+			String rowId_aux = "";
+			for(int i = 0; i < rowId.length - 1; ++i) rowId_aux += String.valueOf(rowId[i]) + ", ";
+			if (rowId.length > 0) rowId_aux += String.valueOf(rowId[rowId.length - 1]);
+			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME }, KEY_ROWID + " IN(" + rowId_aux + ")", null, null, null, null);
+		}
+		
 		public Cursor fetchCategory(long rowId) throws SQLException {
 			Cursor mCursor = db.query(true, DB_TABLE, new String[] { KEY_ROWID, KEY_NAME }, KEY_ROWID + "="
 					+ rowId, null, null, null, null, null);

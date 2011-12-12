@@ -68,22 +68,35 @@ public class CatTaskDbAdapter {
 			return mCursor;
 		}
 		
-		public Cursor fetchCat(long idCategory) throws SQLException {
-			Cursor mCursor = db.query(true, DB_TABLE, new String[] { KEY_ROWID, KEY_IDCAT, KEY_IDTASK }, KEY_IDCAT + "=" + idCategory, 
-					null, null, null, null, null);
-			if (mCursor != null) {
-				mCursor.moveToFirst();
-			}
-			return mCursor;
-		}
-		
-		public Cursor fetchTask(long idTask) throws SQLException {
+		public long[] fetchCat(long idTask) throws SQLException {
 			Cursor mCursor = db.query(true, DB_TABLE, new String[] { KEY_ROWID, KEY_IDCAT, KEY_IDTASK }, KEY_IDTASK + "=" + idTask, 
 					null, null, null, null, null);
 			if (mCursor != null) {
 				mCursor.moveToFirst();
 			}
-			return mCursor;
+			long[] rowIdCat = new long[mCursor.getCount()];
+			int i = 0;
+			//mCursor.moveToFirst();
+			while (!mCursor.isAfterLast()) {
+				rowIdCat[i] = mCursor.getLong(1);
+				++i;
+				mCursor.moveToNext();
+			}
+			return rowIdCat;
+		}
+		
+		public long[] fetchTask(long idCategory) throws SQLException {
+			Cursor mCursor = db.query(true, DB_TABLE, new String[] { KEY_ROWID, KEY_IDCAT, KEY_IDTASK }, KEY_IDCAT + "=" + idCategory, 
+					null, null, null, null, null);
+			if (mCursor != null) {
+				mCursor.moveToFirst();
+			}
+			long[] rowIdTask = new long[mCursor.getCount()];
+			for (int i = 0; !mCursor.isAfterLast(); ++i) {
+				rowIdTask[i] = mCursor.getLong(2);
+				mCursor.moveToNext();
+			}
+			return rowIdTask;
 		}
 
 		private ContentValues createContentValues(long idTask, long idCategory) {

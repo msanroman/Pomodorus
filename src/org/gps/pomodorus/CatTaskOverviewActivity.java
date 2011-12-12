@@ -26,17 +26,24 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
 	private Cursor cursor;
 	protected Cursor task;
 	
+	private long id;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.task_list);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) id = extras.getLong("id");
+		
 		this.getListView().setDividerHeight(2);
 		dbHelper = new TaskDbAdapter(this);
 		dbCatTaskHelper = new CatTaskDbAdapter(this);
+		dbCatTaskHelper.open();
 		dbHelper.open();
 		fillData();
 		dbHelper.close();
+		dbCatTaskHelper.close();
 		this.getListView().setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, final long id) {
 
@@ -120,15 +127,15 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
 	}
 	
 	private void fillData() {
-
-		cursor = dbHelper.fetchAllTasks();
+		long[] rowid_tasques = dbCatTaskHelper.fetchTask(id);
+		cursor = dbHelper.fetchTasks(rowid_tasques);
 		startManagingCursor(cursor);
 		String[] from = new String[] { TaskDbAdapter.KEY_NAME, TaskDbAdapter.KEY_REMAINING_POMODOROS, TaskDbAdapter.KEY_TOTAL_POMODOROS };
 		int[] to = new int[] { R.id.taskName, R.id.taskRemainingPomodoros, R.id.taskTotalPomodoros };
+
 		// Now create an array adapter and set it to display using our row
 		SimpleCursorAdapter tasks = new SimpleCursorAdapter(this,
 				R.layout.task_row, cursor, from, to);
-		
 		setListAdapter(tasks);
 	}
 
