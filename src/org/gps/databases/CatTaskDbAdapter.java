@@ -38,7 +38,7 @@ public class CatTaskDbAdapter {
 		}
 		
 		public boolean deleteCatTask(long idCategory, long idTask) {
-			return db.delete(DB_TABLE, KEY_IDCAT + "=" + idCategory + "and" + KEY_IDTASK + "=" + idTask, null) > 0;
+			return db.delete(DB_TABLE, KEY_IDCAT + "=" + idCategory + " and " + KEY_IDTASK + "=" + idTask, null) > 0;
 		}
 		
 		public boolean deleteCat(long idCategory) {
@@ -61,7 +61,7 @@ public class CatTaskDbAdapter {
 		
 		public Cursor fetchCatTask(long idTask, long idCategory) throws SQLException {
 			Cursor mCursor = db.query(true, DB_TABLE, new String[] { KEY_ROWID, KEY_IDCAT, KEY_IDTASK }, KEY_IDCAT + "=" + idCategory 
-					+ "and " + KEY_IDTASK + "="	+ idTask, null, null, null, null, null);
+					+ " and " + KEY_IDTASK + "="	+ idTask, null, null, null, null, null);
 			if (mCursor != null) {
 				mCursor.moveToFirst();
 			}
