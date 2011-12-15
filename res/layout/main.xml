@@ -124,4 +124,14 @@
 	        android:background="@drawable/fancy_button"
 	        android:text="Sobre nosaltres" />
 	</LinearLayout>
+	<Button
+	        android:id="@+id/FillDatabaseTest"
+	        android:layout_width="60dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginTop="5dp"
+	        android:layout_marginBottom="5dp"
+	        android:onClick="onFillDatabaseTest"
+	        android:background="@drawable/fancy_button"
+	        android:text="Fill DB" />
 </LinearLayout>
