@@ -67,7 +67,6 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                                 intent = new Intent(getBaseContext(), UpdateTask.class);
                                 intent.putExtra("id", id);
                                 startActivity(intent);
-                                finish();
                                 break;
                             case 2:
                             	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(TasksOverviewActivity.this);
@@ -78,11 +77,11 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                             		public void onClick(DialogInterface dialog, int whichButton) {
                             			dbHelper.open();
                             			dbHelper.deleteTask(id);
+                        				fillData();
                         				dbHelper.close();
                         				dbCatTaskHelper.open();
                         				dbCatTaskHelper.deleteTask(id);
                         				dbCatTaskHelper.close();
-                            			finish();
                             		}
                             	})
                             	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
@@ -103,7 +102,6 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                             			dbHelper.open();
                             			dbHelper.finishTask(id);
                         				dbHelper.close();
-                            			finish();
                             		}
                             	})
                             	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
@@ -118,7 +116,6 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                             	intent = new Intent(getBaseContext(), PomodoroActivity.class);
                             	intent.putExtras(bundle);
                             	startActivity(intent);
-                            	finish();
                                 break;
                         }
                         

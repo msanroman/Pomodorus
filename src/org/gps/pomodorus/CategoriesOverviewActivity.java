@@ -59,7 +59,6 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
                               intent = new Intent(getBaseContext(), UpdateCategory.class);
                               intent.putExtra("id", id);
                               startActivity(intent);
-                              finish();
                               break;
                             case 1:
                             	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(CategoriesOverviewActivity.this);
@@ -70,11 +69,11 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
                             		public void onClick(DialogInterface dialog, int whichButton) {
                             			dbHelper.open();
                             			dbHelper.deleteCategory(id);
+                            			fillData();
                         				dbHelper.close();
                         				dbCatTaskHelper.open();
                         				dbCatTaskHelper.deleteCat(id);
                         				dbCatTaskHelper.close();
-                            			finish();
                             		}
                             	})
                             	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
@@ -131,5 +130,12 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
 		Dialog dialog = new Dialog(this);
 		dialog.setTitle(dbHelper.fetchCategory(id).getString(1));
 		dialog.setContentView(R.layout.help);
+	}
+	
+	public void onResume() {	
+		super.onResume();
+		dbHelper.open();
+		fillData();
+		dbHelper.close();
 	}
 }

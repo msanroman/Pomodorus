@@ -74,7 +74,6 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
                                 intent = new Intent(getBaseContext(), UpdateTask.class);
                                 intent.putExtra("id", id);
                                 startActivity(intent);
-                                finish();
                                 break;
                             case 2:
                             	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(CatTaskOverviewActivity.this);
@@ -85,11 +84,11 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
                             		public void onClick(DialogInterface dialog, int whichButton) {
                             			dbHelper.open();
                             			dbHelper.deleteTask(id);
-                        				dbHelper.close();
                         				dbCatTaskHelper.open();
+                        				fillData();
+                        				dbHelper.close();
                         				dbCatTaskHelper.deleteTask(id);
                         				dbCatTaskHelper.close();
-                            			finish();
                             		}
                             	})
                             	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
@@ -110,7 +109,6 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
                             			dbHelper.open();
                             			dbHelper.finishTask(id);
                         				dbHelper.close();
-                            			finish();
                             		}
                             	})
                             	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
@@ -125,7 +123,6 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
                             	intent = new Intent(getBaseContext(), PomodoroActivity.class);
                             	intent.putExtras(bundle);
                             	startActivity(intent);
-                            	finish();
                                 break;
                         }
                         
@@ -166,5 +163,14 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
 		Dialog dialog = new Dialog(this);
 		dialog.setTitle(dbHelper.fetchTask(id).getString(1));
 		dialog.setContentView(R.layout.help);
+	}
+	
+	public void onResume() {	
+		super.onResume();
+		dbHelper.open();
+		dbCatTaskHelper.open();
+		fillData();
+		dbHelper.close();
+		dbCatTaskHelper.close();
 	}
 }
