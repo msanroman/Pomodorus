@@ -140,4 +140,12 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 		dialog.setTitle(dbHelper.fetchTask(id).getString(1));
 		dialog.setContentView(R.layout.help);
 	}
+	
+	public void onResume() {
+		
+		super.onResume();
+		dbHelper.open();
+		fillData();
+		dbHelper.close();
+	}
 }
