@@ -9,7 +9,8 @@ public class TaskTable {
 			"create table tasks (_id integer primary key autoincrement, " +
 			"name text not null, description text not null, " +
 			"total_pomodoros integer not null, " +
-			"remaining_pomodoros integer not null);";
+			"remaining_pomodoros integer not null, " +
+			"finished boolean not null);";
 
 	public static void onCreate(SQLiteDatabase database){
 		database.execSQL(DATABASE_CREATE);

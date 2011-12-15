@@ -14,6 +14,7 @@ public class TaskDbAdapter {
 		public static final String KEY_DESCRIPTION = "description";
 		public static final String KEY_TOTAL_POMODOROS = "total_pomodoros";
 		public static final String KEY_REMAINING_POMODOROS = "remaining_pomodoros";
+		public static final String KEY_FINISHED = "finished";
 		private static final String DB_TABLE = "tasks";
 		private Context context;
 		private SQLiteDatabase db;
@@ -37,12 +38,26 @@ public class TaskDbAdapter {
 			
 			ContentValues values = createContentValues(name, description, pomodoros);
 			values.put(KEY_REMAINING_POMODOROS, pomodoros);
+			values.put(KEY_FINISHED, false);
 			return db.insert(DB_TABLE, null, values);
 		}
 		
 		public boolean updateTask(long rowId, String name, String description, int pomodoros) {
 			ContentValues values = createContentValues(name, description, pomodoros);
 			values.put(KEY_REMAINING_POMODOROS, pomodoros);
+			values.put(KEY_FINISHED, false);
+			return db.update(DB_TABLE, values, KEY_ROWID + "=" + rowId, null) > 0;
+		}
+		
+		public boolean finishTask(long rowId) {
+			Cursor mCursor = db.query(true, DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS }, KEY_ROWID + "="
+					+ rowId, null, null, null, null, null);
+			if (mCursor != null) {
+				mCursor.moveToFirst();
+			}
+			ContentValues values = createContentValues(mCursor.getString(1), mCursor.getString(2), mCursor.getInt(3));
+			values.put(KEY_REMAINING_POMODOROS, mCursor.getInt(4));
+			values.put(KEY_FINISHED, true);
 			return db.update(DB_TABLE, values, KEY_ROWID + "=" + rowId, null) > 0;
 		}
 
@@ -57,18 +72,26 @@ public class TaskDbAdapter {
 		 */
 
 		public Cursor fetchAllTasks() {
-			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS }, null, null, null, null, null);
+			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, null, null, null, null, null);
 		}
 		
 		public Cursor fetchTasks(long[] rowId) {
 			String rowId_aux = "";
 			for(int i = 0; i < rowId.length - 1; ++i) rowId_aux += String.valueOf(rowId[i]) + ", ";
 			if (rowId.length > 0) rowId_aux += String.valueOf(rowId[rowId.length - 1]);
-			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS }, KEY_ROWID + " IN("+ rowId_aux +")", null, null, null, null);
+			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, KEY_ROWID + " IN("+ rowId_aux +")", null, null, null, null);
+		}
+		
+		public Cursor fetchFinished() {
+			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, KEY_FINISHED + "=true", null, null, null, null);
+		}
+		
+		public Cursor fetchNotFinished() {
+			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, KEY_FINISHED + "=false", null, null, null, null);
 		}
 		
 		public Cursor fetchTask(long rowId) throws SQLException {
-			Cursor mCursor = db.query(true, DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS }, KEY_ROWID + "="
+			Cursor mCursor = db.query(true, DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, KEY_ROWID + "="
 					+ rowId, null, null, null, null, null);
 			if (mCursor != null) {
 				mCursor.moveToFirst();
@@ -90,6 +113,7 @@ public class TaskDbAdapter {
 
             ContentValues values = createContentValues(name, description, totalPomodoros);
             values.put(KEY_REMAINING_POMODOROS, remainingPomodoros);
+            values.put(KEY_FINISHED, false);
             return db.update(DB_TABLE, values, KEY_ROWID + "=" + id, null) > 0;            
         }
 

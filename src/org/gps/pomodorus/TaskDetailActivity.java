@@ -21,6 +21,10 @@ public class TaskDetailActivity extends Activity {
         setContentView(R.layout.taskdetail);  
         Bundle extras = getIntent().getExtras();
         if (extras != null) id = extras.getLong("id");
+        fillData();
+    }
+
+	private void fillData() {
         dbHelper = new TaskDbAdapter(this);
         dbCat = new CategoryDbAdapter(this);
         dbCatTask = new CatTaskDbAdapter(this);
@@ -49,5 +53,8 @@ public class TaskDetailActivity extends Activity {
 	    DescTask.setText(task.getString(2));
 	    TextView Categories = (TextView)findViewById(R.id.Categories);
 	    Categories.setText(Categories_aux);
-    }
+	    TextView Finalitzada = (TextView)findViewById(R.id.Finalitzada);
+	    if (task.getInt(5) == 1) Finalitzada.setText("La tasca està finalitzada");
+	    else Finalitzada.setText("La Tasca no està finalitzada");
+	}
 }

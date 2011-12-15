@@ -22,7 +22,7 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
 
 	private TaskDbAdapter dbHelper;
 	private CatTaskDbAdapter dbCatTaskHelper;
-	private static final CharSequence[] items = { "Veure detall", "Modificar", "Esborrar", "Començar Pomodoro" };
+	private static final CharSequence[] items = { "Veure detall", "Modificar", "Esborrar", "Finalitzar Tasca", "Començar Pomodoro" };
 	private Cursor cursor;
 	protected Cursor task;
 	
@@ -101,6 +101,27 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
                             	BorrarDialog.show();
                             	break;
                             case 3:
+                            	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(CatTaskOverviewActivity.this);
+                            	builderFinalitzar.setIcon(R.drawable.alert_dialog_icon)
+                            	.setTitle("Segur que desitges finalitzar la tasca?")   
+                            	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
+                            		
+                            		public void onClick(DialogInterface dialog, int whichButton) {
+                            			dbHelper.open();
+                            			dbHelper.finishTask(id);
+                        				dbHelper.close();
+                            			finish();
+                            		}
+                            	})
+                            	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
+                            		public void onClick(DialogInterface dialog, int whichButton) {
+                            			/* nada */
+                            		}
+                            	});
+                            	AlertDialog FinalitzarDialog = builderFinalitzar.create();
+                            	FinalitzarDialog.show();
+                            	break;
+                            case 4:
                             	intent = new Intent(getBaseContext(), PomodoroActivity.class);
                             	intent.putExtras(bundle);
                             	startActivity(intent);
