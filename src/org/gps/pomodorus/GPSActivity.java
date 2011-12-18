@@ -1,7 +1,5 @@
 package org.gps.pomodorus;
 
-import java.lang.reflect.Array;
-
 import org.gps.databases.CatTaskDbAdapter;
 import org.gps.databases.CategoryDbAdapter;
 import org.gps.databases.TaskDbAdapter;
@@ -10,7 +8,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
 public class GPSActivity extends Activity {
 

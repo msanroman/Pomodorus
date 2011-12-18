@@ -110,7 +110,7 @@ public class NotFinishedCatTaskOverviewActivity extends ListActivity implements 
                             			dbHelper.finishTask(id);
                             			dbCatTaskHelper.open();
                         				fillData();
-                        				dbCatTaskHelper.deleteTask(id);
+                        				dbCatTaskHelper.close();
                             			dbHelper.close();
                             		}
                             	})
