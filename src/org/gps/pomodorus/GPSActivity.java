@@ -35,7 +35,7 @@ public class GPSActivity extends Activity {
     
     public void onLlistarTasquesClick(View button) {
 
-        Intent newIntent = new Intent(this, TasksOverviewActivity.class);
+        Intent newIntent = new Intent(this, TasksTabActivity.class);
         startActivity(newIntent);
     }
     

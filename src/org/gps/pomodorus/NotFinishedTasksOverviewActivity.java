@@ -18,7 +18,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SimpleCursorAdapter;
 
-public class TasksOverviewActivity extends ListActivity implements OnItemClickListener{
+public class NotFinishedTasksOverviewActivity extends ListActivity implements OnItemClickListener{
 
 	private TaskDbAdapter dbHelper;
 	private CatTaskDbAdapter dbCatTaskHelper;
@@ -56,7 +56,6 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                         bundle.putCharSequence("description", task.getString(2));
                         bundle.putInt("totalPomodoros", task.getInt(3));
                         bundle.putInt("remainingPomodoros", task.getInt(4));
-                        task.close();
                         switch(item){
                             case 0:
                                 intent = new Intent(getBaseContext(), TaskDetailActivity.class);
@@ -69,7 +68,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                                 startActivity(intent);
                                 break;
                             case 2:
-                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(TasksOverviewActivity.this);
+                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(NotFinishedTasksOverviewActivity.this);
                             	builderBorrar.setIcon(R.drawable.alert_dialog_icon)
                             	.setTitle("Segur que desitges eliminar la tasca?")   
                             	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
@@ -93,7 +92,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                             	BorrarDialog.show();
                             	break;
                             case 3:
-                            	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(TasksOverviewActivity.this);
+                            	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(NotFinishedTasksOverviewActivity.this);
                             	builderFinalitzar.setIcon(R.drawable.alert_dialog_icon)
                             	.setTitle("Segur que desitges finalitzar la tasca?")   
                             	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
@@ -139,7 +138,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 	
 	private void fillData() {
 
-		cursor = dbHelper.fetchAllTasks();
+		cursor = dbHelper.fetchNotFinished();
 		startManagingCursor(cursor);
 		String[] from = new String[] { TaskDbAdapter.KEY_NAME, TaskDbAdapter.KEY_REMAINING_POMODOROS, TaskDbAdapter.KEY_TOTAL_POMODOROS };
 		int[] to = new int[] { R.id.taskName, R.id.taskRemainingPomodoros, R.id.taskTotalPomodoros };
