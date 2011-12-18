@@ -86,6 +86,7 @@ public class CatTaskDbAdapter {
 		}
 		
 		public long[] fetchTask(long idCategory) throws SQLException {
+			
 			Cursor mCursor = db.query(true, DB_TABLE, new String[] { KEY_ROWID, KEY_IDCAT, KEY_IDTASK }, KEY_IDCAT + "=" + idCategory, 
 					null, null, null, null, null);
 			if (mCursor != null) {

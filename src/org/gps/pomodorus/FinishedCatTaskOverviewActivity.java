@@ -18,11 +18,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SimpleCursorAdapter;
 
-public class CatTaskOverviewActivity extends ListActivity implements OnItemClickListener{
+public class FinishedCatTaskOverviewActivity extends ListActivity implements OnItemClickListener{
 
 	private TaskDbAdapter dbHelper;
 	private CatTaskDbAdapter dbCatTaskHelper;
-	private static final CharSequence[] items = { "Veure detall", "Modificar", "Esborrar", "Finalitzar Tasca", "Començar Pomodoro" };
+	private static final CharSequence[] items = { "Veure detall", "Esborrar" };
 	private Cursor cursor;
 	protected Cursor task;
 	
@@ -71,12 +71,7 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
                                 startActivity(intent);
                                 break;
                             case 1:
-                                intent = new Intent(getBaseContext(), UpdateTask.class);
-                                intent.putExtra("id", id);
-                                startActivity(intent);
-                                break;
-                            case 2:
-                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(CatTaskOverviewActivity.this);
+                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(FinishedCatTaskOverviewActivity.this);
                             	builderBorrar.setIcon(R.drawable.alert_dialog_icon)
                             	.setTitle("Segur que desitges eliminar la tasca?")   
                             	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
@@ -99,31 +94,6 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
                             	AlertDialog BorrarDialog = builderBorrar.create();
                             	BorrarDialog.show();
                             	break;
-                            case 3:
-                            	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(CatTaskOverviewActivity.this);
-                            	builderFinalitzar.setIcon(R.drawable.alert_dialog_icon)
-                            	.setTitle("Segur que desitges finalitzar la tasca?")   
-                            	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
-                            		
-                            		public void onClick(DialogInterface dialog, int whichButton) {
-                            			dbHelper.open();
-                            			dbHelper.finishTask(id);
-                            			dbHelper.close();
-                            		}
-                            	})
-                            	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
-                            		public void onClick(DialogInterface dialog, int whichButton) {
-                            			/* nada */
-                            		}
-                            	});
-                            	AlertDialog FinalitzarDialog = builderFinalitzar.create();
-                            	FinalitzarDialog.show();
-                            	break;
-                            case 4:
-                            	intent = new Intent(getBaseContext(), PomodoroActivity.class);
-                            	intent.putExtras(bundle);
-                            	startActivity(intent);
-                                break;
                         }
                         
                     }
@@ -146,7 +116,7 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
 	
 	private void fillData() {
 		long[] rowid_tasques = dbCatTaskHelper.fetchTask(id);
-		cursor = dbHelper.fetchTasks(rowid_tasques);
+		cursor = dbHelper.fetchTasksFinished(rowid_tasques);
 		startManagingCursor(cursor);
 		String[] from = new String[] { TaskDbAdapter.KEY_NAME, TaskDbAdapter.KEY_REMAINING_POMODOROS, TaskDbAdapter.KEY_TOTAL_POMODOROS };
 		int[] to = new int[] { R.id.taskName, R.id.taskRemainingPomodoros, R.id.taskTotalPomodoros };

@@ -100,6 +100,7 @@ public class NotFinishedTasksOverviewActivity extends ListActivity implements On
                             		public void onClick(DialogInterface dialog, int whichButton) {
                             			dbHelper.open();
                             			dbHelper.finishTask(id);
+                            			fillData();
                         				dbHelper.close();
                             		}
                             	})

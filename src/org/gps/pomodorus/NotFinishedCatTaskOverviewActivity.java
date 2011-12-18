@@ -18,7 +18,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SimpleCursorAdapter;
 
-public class CatTaskOverviewActivity extends ListActivity implements OnItemClickListener{
+public class NotFinishedCatTaskOverviewActivity extends ListActivity implements OnItemClickListener{
 
 	private TaskDbAdapter dbHelper;
 	private CatTaskDbAdapter dbCatTaskHelper;
@@ -76,7 +76,7 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
                                 startActivity(intent);
                                 break;
                             case 2:
-                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(CatTaskOverviewActivity.this);
+                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(NotFinishedCatTaskOverviewActivity.this);
                             	builderBorrar.setIcon(R.drawable.alert_dialog_icon)
                             	.setTitle("Segur que desitges eliminar la tasca?")   
                             	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
@@ -100,7 +100,7 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
                             	BorrarDialog.show();
                             	break;
                             case 3:
-                            	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(CatTaskOverviewActivity.this);
+                            	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(NotFinishedCatTaskOverviewActivity.this);
                             	builderFinalitzar.setIcon(R.drawable.alert_dialog_icon)
                             	.setTitle("Segur que desitges finalitzar la tasca?")   
                             	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
@@ -108,6 +108,9 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
                             		public void onClick(DialogInterface dialog, int whichButton) {
                             			dbHelper.open();
                             			dbHelper.finishTask(id);
+                            			dbCatTaskHelper.open();
+                        				fillData();
+                        				dbCatTaskHelper.deleteTask(id);
                             			dbHelper.close();
                             		}
                             	})
@@ -146,7 +149,7 @@ public class CatTaskOverviewActivity extends ListActivity implements OnItemClick
 	
 	private void fillData() {
 		long[] rowid_tasques = dbCatTaskHelper.fetchTask(id);
-		cursor = dbHelper.fetchTasks(rowid_tasques);
+		cursor = dbHelper.fetchTasksNotFinished(rowid_tasques);
 		startManagingCursor(cursor);
 		String[] from = new String[] { TaskDbAdapter.KEY_NAME, TaskDbAdapter.KEY_REMAINING_POMODOROS, TaskDbAdapter.KEY_TOTAL_POMODOROS };
 		int[] to = new int[] { R.id.taskName, R.id.taskRemainingPomodoros, R.id.taskTotalPomodoros };

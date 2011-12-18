@@ -79,7 +79,21 @@ public class TaskDbAdapter {
 			String rowId_aux = "";
 			for(int i = 0; i < rowId.length - 1; ++i) rowId_aux += String.valueOf(rowId[i]) + ", ";
 			if (rowId.length > 0) rowId_aux += String.valueOf(rowId[rowId.length - 1]);
-			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, KEY_ROWID + " IN("+ rowId_aux +")", null, null, null, null);
+			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, KEY_ROWID + " IN( "+ rowId_aux +" )", null, null, null, null);
+		}
+		
+		public Cursor fetchTasksFinished(long[] rowId) {
+			String rowId_aux = "";
+			for(int i = 0; i < rowId.length - 1; ++i) rowId_aux += String.valueOf(rowId[i]) + ", ";
+			if (rowId.length > 0) rowId_aux += String.valueOf(rowId[rowId.length - 1]);
+			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, KEY_ROWID + " IN( "+ rowId_aux +" ) and " + KEY_FINISHED + "=1", null, null, null, null);
+		}
+		
+		public Cursor fetchTasksNotFinished(long[] rowId) {
+			String rowId_aux = "";
+			for(int i = 0; i < rowId.length - 1; ++i) rowId_aux += String.valueOf(rowId[i]) + ", ";
+			if (rowId.length > 0) rowId_aux += String.valueOf(rowId[rowId.length - 1]);
+			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, KEY_ROWID + " IN( "+ rowId_aux +" ) and " + KEY_FINISHED + "=0", null, null, null, null);
 		}
 		
 		public Cursor fetchFinished() {

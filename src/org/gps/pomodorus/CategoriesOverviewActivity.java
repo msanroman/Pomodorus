@@ -85,7 +85,7 @@ public class CategoriesOverviewActivity extends ListActivity implements OnItemCl
                             	BorrarDialog.show();
                             	break;
                             case 2:
-                                intent = new Intent(getBaseContext(), CatTaskOverviewActivity.class);
+                                intent = new Intent(getBaseContext(), CatTaskTabActivity.class);
                                 intent.putExtra("id", id);
                                 startActivity(intent);
                                 finish();
