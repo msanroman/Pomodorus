@@ -23,6 +23,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 	private TaskDbAdapter dbHelper;
 	private CatTaskDbAdapter dbCatTaskHelper;
 	private static final CharSequence[] items = { "Veure detall", "Modificar", "Esborrar", "Finalitzar Tasca", "Començar Pomodoro" };
+	private static final CharSequence[] finishTaskItems = { "Veure detall", "Esborrar" };
 	private Cursor cursor;
 	protected Cursor task;
 	
@@ -45,82 +46,132 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 				task = dbHelper.fetchTask(id);
 				dbHelper.close();
 				dialogBuilder.setTitle("Selecciona una de les següents opcions");
-				dialogBuilder.setItems(items, new OnClickListener() {
-                    
-                    public void onClick(DialogInterface dialog, int item) {
-                    	
-                        Intent intent = null;
-                        Bundle bundle = new Bundle();
-                        bundle.putLong("id", task.getLong(0));
-                        bundle.putCharSequence("name", task.getString(1));
-                        bundle.putCharSequence("description", task.getString(2));
-                        bundle.putInt("totalPomodoros", task.getInt(3));
-                        bundle.putInt("remainingPomodoros", task.getInt(4));
-                        task.close();
-                        switch(item){
-                            case 0:
-                                intent = new Intent(getBaseContext(), TaskDetailActivity.class);
-                                intent.putExtra("id", id);
-                                startActivity(intent);
-                                break;
-                            case 1:
-                                intent = new Intent(getBaseContext(), UpdateTask.class);
-                                intent.putExtra("id", id);
-                                startActivity(intent);
-                                break;
-                            case 2:
-                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(TasksOverviewActivity.this);
-                            	builderBorrar.setIcon(R.drawable.alert_dialog_icon)
-                            	.setTitle("Segur que desitges eliminar la tasca?")   
-                            	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
-                            		
-                            		public void onClick(DialogInterface dialog, int whichButton) {
-                            			dbHelper.open();
-                            			dbHelper.deleteTask(id);
-                        				fillData();
-                        				dbHelper.close();
-                        				dbCatTaskHelper.open();
-                        				dbCatTaskHelper.deleteTask(id);
-                        				dbCatTaskHelper.close();
-                            		}
-                            	})
-                            	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
-                            		public void onClick(DialogInterface dialog, int whichButton) {
-                            			/* nada */
-                            		}
-                            	});
-                            	AlertDialog BorrarDialog = builderBorrar.create();
-                            	BorrarDialog.show();
-                            	break;
-                            case 3:
-                            	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(TasksOverviewActivity.this);
-                            	builderFinalitzar.setIcon(R.drawable.alert_dialog_icon)
-                            	.setTitle("Segur que desitges finalitzar la tasca?")   
-                            	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
-                            		
-                            		public void onClick(DialogInterface dialog, int whichButton) {
-                            			dbHelper.open();
-                            			dbHelper.finishTask(id);
-                        				dbHelper.close();
-                            		}
-                            	})
-                            	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
-                            		public void onClick(DialogInterface dialog, int whichButton) {
-                            			/* nada */
-                            		}
-                            	});
-                            	AlertDialog FinalitzarDialog = builderFinalitzar.create();
-                            	FinalitzarDialog.show();
-                            	break;
-                            case 4:
-                            	intent = new Intent(getBaseContext(), PomodoroActivity.class);
-                            	intent.putExtras(bundle);
-                            	startActivity(intent);
-                                break;
-                        }
-                        
-                    }
-                });
+				if (isFinished()) {
+					dialogBuilder.setItems(finishTaskItems, new OnClickListener() {
+	                    
+	                    public void onClick(DialogInterface dialog, int item) {
+	                    	
+	                        Intent intent = null;
+	                        Bundle bundle = new Bundle();
+	                        bundle.putLong("id", task.getLong(0));
+	                        bundle.putCharSequence("name", task.getString(1));
+	                        bundle.putCharSequence("description", task.getString(2));
+	                        bundle.putInt("totalPomodoros", task.getInt(3));
+	                        bundle.putInt("remainingPomodoros", task.getInt(4));
+	                        task.close();
+	                        switch(item){
+	                            case 0:
+	                                intent = new Intent(getBaseContext(), TaskDetailActivity.class);
+	                                intent.putExtra("id", id);
+	                                startActivity(intent);
+	                                break;
+	                            case 1:
+	                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(TasksOverviewActivity.this);
+	                            	builderBorrar.setIcon(R.drawable.alert_dialog_icon)
+	                            	.setTitle("Segur que desitges eliminar la tasca?")   
+	                            	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
+	                            		
+	                            		public void onClick(DialogInterface dialog, int whichButton) {
+	                            			dbHelper.open();
+	                            			dbHelper.deleteTask(id);
+	                        				fillData();
+	                        				dbHelper.close();
+	                        				dbCatTaskHelper.open();
+	                        				dbCatTaskHelper.deleteTask(id);
+	                        				dbCatTaskHelper.close();
+	                            		}
+	                            	})
+	                            	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
+	                            		public void onClick(DialogInterface dialog, int whichButton) {
+	                            			/* nada */
+	                            		}
+	                            	});
+	                            	AlertDialog BorrarDialog = builderBorrar.create();
+	                            	BorrarDialog.show();
+	                            	break;
+	                        }
+	                        
+	                    }
+	                });	
+				}
+				else {
+					dialogBuilder.setItems(items, new OnClickListener() {
+	                    
+	                    public void onClick(DialogInterface dialog, int item) {
+	                    	
+	                        Intent intent = null;
+	                        Bundle bundle = new Bundle();
+	                        bundle.putLong("id", task.getLong(0));
+	                        bundle.putCharSequence("name", task.getString(1));
+	                        bundle.putCharSequence("description", task.getString(2));
+	                        bundle.putInt("totalPomodoros", task.getInt(3));
+	                        bundle.putInt("remainingPomodoros", task.getInt(4));
+	                        task.close();
+	                        switch(item){
+	                            case 0:
+	                                intent = new Intent(getBaseContext(), TaskDetailActivity.class);
+	                                intent.putExtra("id", id);
+	                                startActivity(intent);
+	                                break;
+	                            case 1:
+	                                intent = new Intent(getBaseContext(), UpdateTask.class);
+	                                intent.putExtra("id", id);
+	                                startActivity(intent);
+	                                break;
+	                            case 2:
+	                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(TasksOverviewActivity.this);
+	                            	builderBorrar.setIcon(R.drawable.alert_dialog_icon)
+	                            	.setTitle("Segur que desitges eliminar la tasca?")   
+	                            	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
+	                            		
+	                            		public void onClick(DialogInterface dialog, int whichButton) {
+	                            			dbHelper.open();
+	                            			dbHelper.deleteTask(id);
+	                        				fillData();
+	                        				dbHelper.close();
+	                        				dbCatTaskHelper.open();
+	                        				dbCatTaskHelper.deleteTask(id);
+	                        				dbCatTaskHelper.close();
+	                            		}
+	                            	})
+	                            	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
+	                            		public void onClick(DialogInterface dialog, int whichButton) {
+	                            			/* nada */
+	                            		}
+	                            	});
+	                            	AlertDialog BorrarDialog = builderBorrar.create();
+	                            	BorrarDialog.show();
+	                            	break;
+	                            case 3:
+	                            	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(TasksOverviewActivity.this);
+	                            	builderFinalitzar.setIcon(R.drawable.alert_dialog_icon)
+	                            	.setTitle("Segur que desitges finalitzar la tasca?")   
+	                            	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
+	                            		
+	                            		public void onClick(DialogInterface dialog, int whichButton) {
+	                            			dbHelper.open();
+	                            			dbHelper.finishTask(id);
+	                        				dbHelper.close();
+	                            		}
+	                            	})
+	                            	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
+	                            		public void onClick(DialogInterface dialog, int whichButton) {
+	                            			/* nada */
+	                            		}
+	                            	});
+	                            	AlertDialog FinalitzarDialog = builderFinalitzar.create();
+	                            	FinalitzarDialog.show();
+	                            	break;
+	                            case 4:
+	                            	intent = new Intent(getBaseContext(), PomodoroActivity.class);
+	                            	intent.putExtras(bundle);
+	                            	startActivity(intent);
+	                                break;
+	                        }
+	                        
+	                    }
+	                });
+				}
 				AlertDialog ad = dialogBuilder.create();
 				ad.show();
 		    }
@@ -165,5 +216,9 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 		dbHelper.open();
 		fillData();
 		dbHelper.close();
+	}
+
+	private boolean isFinished() {
+		return task.getInt(5) == 1;
 	}
 }
