@@ -133,11 +133,28 @@ public class RestTimeActivity extends Activity {
 								finish();
 								break;
 							case 2:
-								finishTask();
-								Intent menuPrincipal = new Intent(getBaseContext(),
-										GPSActivity.class);
-								startActivity(menuPrincipal);
-								finish();
+                            	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(RestTimeActivity.this);
+                            	builderFinalitzar.setIcon(R.drawable.alert_dialog_icon)
+                            	.setTitle("Segur que desitges finalitzar la tasca?")   
+                            	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
+                            		
+                            		public void onClick(DialogInterface dialog, int whichButton) {
+                            			finishTask();
+                            			Intent menuPrincipal = new Intent(getBaseContext(),
+                            					GPSActivity.class);
+                            			startActivity(menuPrincipal);
+                            			finish();
+                            		}
+                            	})
+                            	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
+                            		
+                            		public void onClick(DialogInterface dialog, int whichButton) {
+                            			/* nada */
+                            		}
+                            	});
+                            	
+                            	AlertDialog FinalitzarDialog = builderFinalitzar.create();
+                            	FinalitzarDialog.show();
 								break;
 							case 3:
 								if (pomodoroTerminat)
