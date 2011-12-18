@@ -4,65 +4,79 @@ import android.widget.ProgressBar;
 
 public class TimeThread extends Thread {
 
-    private boolean _running = false;
-    ProgressBar _timeBar;
-    int _currentValue;
-    PomodoroActivity _main;
+	private boolean _running = false;
+	ProgressBar _timeBar;
+	int _currentValue;
+	PomodoroActivity _pomodoroMain;
+	RestTimeActivity _restMain;
 
-    public TimeThread(PomodoroActivity activity, ProgressBar timeBar,
-            int maxValue) {
+	public TimeThread(PomodoroActivity activity, ProgressBar timeBar,
+			int maxValue) {
 
-        _timeBar = timeBar;
-        _main = activity;
-        _currentValue = maxValue;
-        _timeBar.setMax(maxValue);
-        _timeBar.setProgress(_currentValue);
-    }
+		_timeBar = timeBar;
+		_pomodoroMain = activity;
+		_currentValue = maxValue;
+		_timeBar.setMax(maxValue);
+		_timeBar.setProgress(_currentValue);
+	}
 
-    public void setRunning(boolean run) {
+	public TimeThread(RestTimeActivity restTimeActivity, ProgressBar timeBar,
+			int restTime) {
 
-        _running = run;
-    }
+		_timeBar = timeBar;
+		_restMain = restTimeActivity;
+		_currentValue = restTime;
+		_timeBar.setMax(restTime);
+		_timeBar.setProgress(_currentValue);
+	}
 
-    public void setTime(int time) {
+	public void setRunning(boolean run) {
 
-        _currentValue = time;
-    }
+		_running = run;
+	}
 
-    public int getTime() {
+	public void setTime(int time) {
 
-        return _currentValue;
-    }
+		_currentValue = time;
+	}
 
-    public void resetTime(int maxValue) {
+	public int getTime() {
 
-        _timeBar.setMax(maxValue);
-        _currentValue = maxValue;
-    }
+		return _currentValue;
+	}
 
-    @Override
-    public void run() {
+	public void resetTime(int maxValue) {
 
-        long ticksPS = 1000;
-        long startTime;
-        long sleepTime;
-        while (_running) {
-            startTime = System.currentTimeMillis();
-            --_currentValue;
-            _timeBar.setProgress(_currentValue);
-            if (_currentValue == 0) {
-                _running = false;
-                _main.onTimeOut();
-            }
-            sleepTime = ticksPS - (System.currentTimeMillis() - startTime);
-            try {
-                if (sleepTime > 0)
-                    sleep(sleepTime);
-                else sleep(10);
-            }
-            catch (Exception e) {
-            }
-        }
-    }
+		_timeBar.setMax(maxValue);
+		_currentValue = maxValue;
+	}
+
+	@Override
+	public void run() {
+
+		long ticksPS = 1000;
+		long startTime;
+		long sleepTime;
+		while (_running) {
+			startTime = System.currentTimeMillis();
+			--_currentValue;
+			_timeBar.setProgress(_currentValue);
+			if (_currentValue == 0) {
+				_running = false;
+				if (_pomodoroMain != null)
+					_pomodoroMain.onTimeOut();
+				else
+					_restMain.onTimeOut();
+			}
+			sleepTime = ticksPS - (System.currentTimeMillis() - startTime);
+			try {
+				if (sleepTime > 0)
+					sleep(sleepTime);
+				else
+					sleep(10);
+			} catch (Exception e) {
+			}
+		}
+	}
 
 }

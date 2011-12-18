@@ -16,170 +16,183 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+public class PomodoroActivity extends Activity implements
+		android.view.View.OnClickListener, OnItemClickListener {
 
-public class PomodoroActivity extends Activity implements android.view.View.OnClickListener, OnItemClickListener{
-    
-    private TaskDbAdapter dbHelper = new TaskDbAdapter(this);
-    private static boolean START = true;
-    private static boolean STOP = false;
-    private static int POMODORO = 25*60;
-    private static int POMODOROTEST = 10;
-    private boolean isStarting = START;
-    private TimeThread timeThread;
-    private int remainingTime = 0;
-    private MediaPlayer mediaPlayer;
-    private Handler handler = new Handler();
-    long id;
-    String name;
-    String description;
-    int totalPomodoros;
-    int remainingPomodoros;
-    private static final CharSequence[] items = { "Twittejar últim pomodoro",
-        "Començar descans",
-        "Extendre pomodoros"
-    };
-    
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+	private TaskDbAdapter dbHelper = new TaskDbAdapter(this);
+	private static boolean START = true;
+	private static boolean STOP = false;
+	private static int POMODORO = 25 * 60;
+	private static int POMODOROTEST = 10;
+	private boolean isStarting = START;
+	private TimeThread timeThread;
+	private int remainingTime = 0;
+	private MediaPlayer pomodoroTicking;
+	private MediaPlayer alarmRinging;
+	private Handler handler = new Handler();
+	private boolean finishedPomodoro;
+	private long id;
+	private String name;
+	private String description;
+	private int totalPomodoros;
+	private int remainingPomodoros;
+	private static final CharSequence[] items = { "Twittejar últim pomodoro",
+			"Començar descans", "Extendre pomodoros" };
 
-        super.onCreate(savedInstanceState);
-        setUpLayoutContent();
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
 
-    private void setUpLayoutContent() {
+		super.onCreate(savedInstanceState);
+		setUpLayoutContent();
+	}
 
-        setContentView(R.layout.pomodoro);
-        
-        this.id = getIntent().getExtras().getLong("id");
+	private void setUpLayoutContent() {
 
-        TextView name = (TextView) findViewById(R.id.TaskName);
-        this.name = (String) getTaskAttribute("name");
-        name.setText(this.name);
-        
-        TextView description = (TextView) findViewById(R.id.TaskDescription);
-        this.description = (String) getTaskAttribute("description");
-        description.setText(this.description);
-        
-        TextView totalPomodoros = (TextView) findViewById(R.id.TotalPomodoros);
-        this.totalPomodoros = getIntent().getExtras().getInt("totalPomodoros");
-        totalPomodoros.setText(String.valueOf(this.totalPomodoros));
-        
-        TextView remainingPomodoros = (TextView) findViewById(R.id.RemainingPomodoros);
-        this.remainingPomodoros = getIntent().getExtras().getInt("remainingPomodoros");
-        remainingPomodoros.setText(String.valueOf(this.remainingPomodoros));
-        
-        View button = findViewById(R.id.PomodoroButton);
-        button.setOnClickListener(this);
-    }
+		setContentView(R.layout.pomodoro);
 
-    public void onClick(View v) {
+		this.id = getIntent().getExtras().getLong("id");
 
-            if(isStarting) {
-                startPomodoro();
-                ((TextView) v).setText("Stop pomodoro");
-                isStarting = STOP;
-            }
-            else {
-                this.runOnUiThread(stopPomodoro);
-                ((TextView) v).setText("Start pomodoro");
-                isStarting = START;
-            }
-    }
+		TextView name = (TextView) findViewById(R.id.TaskName);
+		this.name = (String) getTaskAttribute("name");
+		name.setText(this.name);
 
-    private Runnable stopPomodoro = new Runnable() {
+		TextView description = (TextView) findViewById(R.id.TaskDescription);
+		this.description = (String) getTaskAttribute("description");
+		description.setText(this.description);
 
-    	public void run() {
-	        ((TextView) findViewById(R.id.PomodoroButton)).setText("Start pomodoro");
-	        isStarting = START;
-	        timeThread.setRunning(false);
-	        mediaPlayer.stop();
-    	}
-    };
+		TextView totalPomodoros = (TextView) findViewById(R.id.TotalPomodoros);
+		this.totalPomodoros = getIntent().getExtras().getInt("totalPomodoros");
+		totalPomodoros.setText(String.valueOf(this.totalPomodoros));
 
-    private void startPomodoro() {
+		TextView remainingPomodoros = (TextView) findViewById(R.id.RemainingPomodoros);
+		this.remainingPomodoros = getIntent().getExtras().getInt(
+				"remainingPomodoros");
+		remainingPomodoros.setText(String.valueOf(this.remainingPomodoros));
 
-        ProgressBar pomoProgress = (ProgressBar) findViewById(R.id.progressBar1);
-        timeThread = new TimeThread(this, pomoProgress, POMODOROTEST);
-        if (remainingTime > 0)
-            timeThread.setTime(remainingTime);
-        timeThread.setRunning(true);
-        timeThread.start();
-        mediaPlayer = MediaPlayer.create(this, R.raw.tictac);
-        mediaPlayer.setLooping(true);
-        mediaPlayer.start();
-    }
+		View button = findViewById(R.id.PomodoroButton);
+		button.setOnClickListener(this);
+	}
 
-    private CharSequence getTaskAttribute(String attribute) {
+	public void onClick(View v) {
 
-        CharSequence attributeValue = getIntent().getExtras().getCharSequence(attribute);
-        return attributeValue;
-    }
+		if (isStarting) {
+			startPomodoro();
+			((TextView) v).setText("Stop pomodoro");
+			isStarting = STOP;
+		} else {
+			
+			this.runOnUiThread(stopPomodoro);
+			((TextView) v).setText("Start pomodoro");
+			isStarting = START;
+		}
+	}
 
-    public void onTimeOut() {
-        
-        remainingTime = 0;
-        this.runOnUiThread(stopPomodoro);
-        this.runOnUiThread(decrementRemainingPomodoros);
-        this.runOnUiThread(showPomodoroIsOverDialog);
-    }
+	private Runnable stopPomodoro = new Runnable() {
 
-    private Runnable decrementRemainingPomodoros = new Runnable() {
+		public void run() {
+			((TextView) findViewById(R.id.PomodoroButton))
+					.setText("Start pomodoro");
+			isStarting = START;
+			timeThread.setRunning(false);
+			pomodoroTicking.stop();
+			if (finishedPomodoro)
+				startRinging();
+		}
+	};
 
-        public void run() {
-            TextView remainingPomodorosView = (TextView) findViewById(R.id.RemainingPomodoros);
-            --remainingPomodoros;
-            dbHelper.open();
-            dbHelper.updateTask(id, name, description, totalPomodoros, remainingPomodoros);
-            dbHelper.close();
-            remainingPomodorosView.setText(String.valueOf(remainingPomodoros));
-        }
-    };
+	private void startPomodoro() {
 
-    private Runnable showPomodoroIsOverDialog = new Runnable() {
+		ProgressBar pomoProgress = (ProgressBar) findViewById(R.id.progressBar1);
+		timeThread = new TimeThread(this, pomoProgress, POMODOROTEST);
+		if (remainingTime > 0)
+			timeThread.setTime(remainingTime);
+		timeThread.setRunning(true);
+		timeThread.start();
+		pomodoroTicking = MediaPlayer.create(this, R.raw.tictac);
+		pomodoroTicking.setLooping(true);
+		finishedPomodoro = false;
+		pomodoroTicking.start();
+	}
 
-        public void run() {
+	protected void startRinging() {
 
-            AlertDialog.Builder pomodoroOverMenu = new AlertDialog.Builder(PomodoroActivity.this);
-            pomodoroOverMenu.setTitle("Pomodoro is over!");
-            pomodoroOverMenu.setItems(items, new android.content.DialogInterface.OnClickListener() {
-                
-                public void onClick(DialogInterface dialog, int item) {
-                    
-                    switch(item) {
-                        case 0:
-                        	Intent intent = new Intent(getBaseContext(), TweetPomodoro.class);
-                        	intent.putExtra("name", name);
-                        	intent.putExtra("pomoactual", totalPomodoros-remainingPomodoros);
-                        	startActivity(intent);
-                            break;
-                        case 1:
-                            showBreakDialog();
-                            break;
-                        case 2:
-                        	showPomoExtenderDialog();
-                        	break;
-                    }
-                }
+		alarmRinging = MediaPlayer.create(PomodoroActivity.this,
+				R.raw.clock_ringing);
+		alarmRinging.start();
+	}
 
-            });
-            
-            AlertDialog ad = pomodoroOverMenu.create();
-            ad.show();
-        }
-    };
-    
-    private void showPomoExtenderDialog() {
+	private CharSequence getTaskAttribute(String attribute) {
 
-        Toast.makeText(PomodoroActivity.this,"Not implemented yet.", 1).show();
-    }
+		CharSequence attributeValue = getIntent().getExtras().getCharSequence(
+				attribute);
+		return attributeValue;
+	}
 
-    private void showBreakDialog() {
-        
-    	Toast.makeText(PomodoroActivity.this,"Not implemented yet.", 1).show();
-    }
+	public void onTimeOut() {
 
-    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		finishedPomodoro = true;
+		remainingTime = 0;
+		this.runOnUiThread(stopPomodoro);
+		this.runOnUiThread(decrementRemainingPomodoros);
+		this.runOnUiThread(showPomodoroIsOverDialog);
+	}
 
-    }
+	private Runnable decrementRemainingPomodoros = new Runnable() {
+
+		public void run() {
+			TextView remainingPomodorosView = (TextView) findViewById(R.id.RemainingPomodoros);
+			--remainingPomodoros;
+			dbHelper.open();
+			dbHelper.updateTask(id, name, description, totalPomodoros,
+					remainingPomodoros);
+			dbHelper.close();
+			remainingPomodorosView.setText(String.valueOf(remainingPomodoros));
+		}
+	};
+
+	private Runnable showPomodoroIsOverDialog = new Runnable() {
+
+		public void run() {
+
+			Intent restTime = new Intent(getBaseContext(),
+					RestTimeActivity.class);
+			restTime.putExtra("taskId", id);
+			restTime.putExtra("name", name);
+			restTime.putExtra("pomoactual",
+					totalPomodoros - remainingPomodoros);
+			restTime.putExtra("terminat", isFinished());
+			startActivity(restTime);
+		}
+	};
+
+	private boolean isFinished() {
+
+		return remainingPomodoros == 0;
+	}
+
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+	}
+	
+	public void onResume() {
+		
+		super.onResume();
+		refreshLayoutContent();
+	}
+
+	private void refreshLayoutContent() {
+
+		if (isFinished()) {
+			dbHelper.open();
+			dbHelper.extendPomodoro(id);
+			dbHelper.close();
+			++remainingPomodoros;
+			++totalPomodoros;
+			TextView remainingPomodoros = (TextView) findViewById(R.id.TotalPomodoros);
+			remainingPomodoros.setText(String.valueOf(totalPomodoros));
+		}
+		TextView remainingPomodoros = (TextView) findViewById(R.id.RemainingPomodoros);
+		remainingPomodoros.setText(String.valueOf(this.remainingPomodoros));
+	}
 
 }
