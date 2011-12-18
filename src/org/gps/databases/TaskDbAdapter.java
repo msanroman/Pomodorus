@@ -83,11 +83,11 @@ public class TaskDbAdapter {
 		}
 		
 		public Cursor fetchFinished() {
-			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, KEY_FINISHED + "=true", null, null, null, null);
+			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, KEY_FINISHED + "=1", null, null, null, null);
 		}
 		
 		public Cursor fetchNotFinished() {
-			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, KEY_FINISHED + "=false", null, null, null, null);
+			return db.query(DB_TABLE, new String[] { KEY_ROWID, KEY_NAME, KEY_DESCRIPTION, KEY_TOTAL_POMODOROS, KEY_REMAINING_POMODOROS, KEY_FINISHED }, KEY_FINISHED + "=0", null, null, null, null);
 		}
 		
 		public Cursor fetchTask(long rowId) throws SQLException {

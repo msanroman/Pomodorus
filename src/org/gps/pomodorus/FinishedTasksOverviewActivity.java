@@ -18,7 +18,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SimpleCursorAdapter;
 
-public class TasksOverviewActivity extends ListActivity implements OnItemClickListener{
+public class FinishedTasksOverviewActivity extends ListActivity implements OnItemClickListener{
 
 	private TaskDbAdapter dbHelper;
 	private CatTaskDbAdapter dbCatTaskHelper;
@@ -68,7 +68,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                                 startActivity(intent);
                                 break;
                             case 2:
-                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(TasksOverviewActivity.this);
+                            	AlertDialog.Builder builderBorrar = new AlertDialog.Builder(FinishedTasksOverviewActivity.this);
                             	builderBorrar.setIcon(R.drawable.alert_dialog_icon)
                             	.setTitle("Segur que desitges eliminar la tasca?")   
                             	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
@@ -92,7 +92,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                             	BorrarDialog.show();
                             	break;
                             case 3:
-                            	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(TasksOverviewActivity.this);
+                            	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(FinishedTasksOverviewActivity.this);
                             	builderFinalitzar.setIcon(R.drawable.alert_dialog_icon)
                             	.setTitle("Segur que desitges finalitzar la tasca?")   
                             	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
@@ -138,7 +138,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
 	
 	private void fillData() {
 
-		cursor = dbHelper.fetchAllTasks();
+		cursor = dbHelper.fetchFinished();
 		startManagingCursor(cursor);
 		String[] from = new String[] { TaskDbAdapter.KEY_NAME, TaskDbAdapter.KEY_REMAINING_POMODOROS, TaskDbAdapter.KEY_TOTAL_POMODOROS };
 		int[] to = new int[] { R.id.taskName, R.id.taskRemainingPomodoros, R.id.taskTotalPomodoros };

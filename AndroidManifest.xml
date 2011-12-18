@@ -11,7 +11,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="org.gps.pomodorus.TasksTabActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity android:name="org.gps.pomodorus.TasksOverviewActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
+        <activity android:name="org.gps.pomodorus.FinishedTasksOverviewActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
+        <activity android:name="org.gps.pomodorus.NotFinishedTasksOverviewActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity android:name="org.gps.pomodorus.CategoriesOverviewActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity android:name="org.gps.pomodorus.CatTaskOverviewActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity android:name="org.gps.pomodorus.CrearTascaActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
