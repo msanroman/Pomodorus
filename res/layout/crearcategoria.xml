@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/radialback" >
 
     <TextView
         android:id="@+id/textViewCrearCat"
@@ -27,6 +28,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
         android:onClick="crearCategoria"
-        android:text="Crear categoria" />
+        android:text="Crear categoria"
+        android:background="@drawable/fancy_button" />
 
 </LinearLayout>

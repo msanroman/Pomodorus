@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/radialback" >
 
     <WebView
         android:id="@+id/webView"
@@ -65,14 +66,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onOauthTwitterClick"
-            android:text="Oauth Twitter" />
+            android:text="Oauth Twitter"
+            android:background="@drawable/fancy_button" />
 
         <Button
             android:id="@+id/EsborrarButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onEsborrarCredencialsClick"
-            android:text="Esborrar Credencials" />
+            android:text="Esborrar Credencials"
+            android:background="@drawable/fancy_button" />
 
     </LinearLayout>
 
