@@ -58,6 +58,7 @@ public class TaskDbAdapter {
 			ContentValues values = createContentValues(mCursor.getString(1), mCursor.getString(2), mCursor.getInt(3));
 			values.put(KEY_REMAINING_POMODOROS, mCursor.getInt(4));
 			values.put(KEY_FINISHED, true);
+			mCursor.close();
 			return db.update(DB_TABLE, values, KEY_ROWID + "=" + rowId, null) > 0;
 		}
 
@@ -130,6 +131,20 @@ public class TaskDbAdapter {
             values.put(KEY_FINISHED, false);
             return db.update(DB_TABLE, values, KEY_ROWID + "=" + id, null) > 0;            
         }
+
+		public void extendPomodoro(long id) {
+			
+			Cursor task = fetchTask(id);
+			String name = task.getString(1);
+			String description = task.getString(2);
+			int totalPomodoros = task.getInt(3) + 1;
+			int remainingPomodoros = task.getInt(4) + 1;
+			task.close();
+			ContentValues values = createContentValues(name, description, totalPomodoros);
+            values.put(KEY_REMAINING_POMODOROS, remainingPomodoros);
+            values.put(KEY_FINISHED, false);
+            db.update(DB_TABLE, values, KEY_ROWID + "=" + id, null); 
+		}
 
 	
 }

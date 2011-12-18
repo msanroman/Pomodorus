@@ -56,6 +56,7 @@ public class TasksOverviewActivity extends ListActivity implements OnItemClickLi
                         bundle.putCharSequence("description", task.getString(2));
                         bundle.putInt("totalPomodoros", task.getInt(3));
                         bundle.putInt("remainingPomodoros", task.getInt(4));
+                        task.close();
                         switch(item){
                             case 0:
                                 intent = new Intent(getBaseContext(), TaskDetailActivity.class);

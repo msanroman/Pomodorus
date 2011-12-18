@@ -34,5 +34,6 @@
         <activity android:name="org.gps.pomodorus.TaskDetailActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity android:name="org.gps.pomodorus.PomodoroActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity android:name="org.gps.pomodorus.TweetPomodoro" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
+        <activity android:name="org.gps.pomodorus.RestTimeActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Black.NoTitleBar" />
 	</application>
 </manifest>
