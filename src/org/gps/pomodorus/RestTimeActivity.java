@@ -100,61 +100,59 @@ public class RestTimeActivity extends Activity {
 		}
 	};
 	
-	private Runnable showRestIsOverDialog = new Runnable(){
+private Runnable showRestIsOverDialog = new Runnable(){
 		
 		public void run() {
 			
-			AlertDialog.Builder pomodoroOverMenu = new AlertDialog.Builder(
+			final AlertDialog.Builder restOverMenu = new AlertDialog.Builder(
 					RestTimeActivity.this);
-			pomodoroOverMenu.setTitle("S'ha acabat el descans!");
-			pomodoroOverMenu.setItems(items,
-					new android.content.DialogInterface.OnClickListener() {
-
-						public void onClick(DialogInterface dialog, int item) {
-
-							switch (item) {
+			restOverMenu.setTitle("S'ha acabat el descans!");
+			restOverMenu.setItems(items,
+				new android.content.DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int item) {
+						switch (item) {
 							case 0:
-								if (pomodoroTerminat)
-									finishTask();
-								if(AppTwitter.Conectat()) {
-									Intent tweetPomodoro = new Intent(
-											getBaseContext(), TweetPomodoro.class);
+								if (AppTwitter.Conectat()) {
+									Intent tweetPomodoro = new Intent(getBaseContext(), TweetPomodoro.class);
 									tweetPomodoro.putExtra("name", tweetName);
-									tweetPomodoro
-											.putExtra("pomoactual", pomoActual);
+									tweetPomodoro.putExtra("pomoactual", pomoActual);
 									startActivity(tweetPomodoro);
+									finish();
 								}
 								else {
-
-									Toast.makeText(RestTimeActivity.this, "You are not logged in!", 1).show();
+	                    			AlertDialog ad = restOverMenu.create();
+	                    			ad.show();
+									Toast.makeText(getBaseContext(), "no estas loguejat", 1).show();
 								}
 								break;
+								
 							case 1:
 								finish();
 								break;
 							case 2:
-                            	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(RestTimeActivity.this);
-                            	builderFinalitzar.setIcon(R.drawable.alert_dialog_icon)
-                            	.setTitle("Segur que desitges finalitzar la tasca?")   
-                            	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
-                            		
-                            		public void onClick(DialogInterface dialog, int whichButton) {
-                            			finishTask();
-                            			Intent menuPrincipal = new Intent(getBaseContext(),
-                            					GPSActivity.class);
-                            			startActivity(menuPrincipal);
-                            			finish();
-                            		}
-                            	})
-                            	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
-                            		
-                            		public void onClick(DialogInterface dialog, int whichButton) {
-                            			/* nada */
-                            		}
-                            	});
-                            	
-                            	AlertDialog FinalitzarDialog = builderFinalitzar.create();
-                            	FinalitzarDialog.show();
+	                        	AlertDialog.Builder builderFinalitzar = new AlertDialog.Builder(RestTimeActivity.this);
+	                        	builderFinalitzar.setIcon(R.drawable.alert_dialog_icon)
+	                        	.setTitle("Segur que desitges finalitzar la tasca?")   
+	                        	.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {
+	                        		
+	                        		public void onClick(DialogInterface dialog, int whichButton) {
+	                        			finishTask();
+	                        			Intent menuPrincipal = new Intent(getBaseContext(),
+	                        					GPSActivity.class);
+	                        			startActivity(menuPrincipal);
+	                        			finish();
+	                        		}
+	                        	})
+	                        	.setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
+	                        		
+	                        		public void onClick(DialogInterface dialog, int whichButton) {
+	                        			AlertDialog ad = restOverMenu.create();
+	                        			ad.show();
+	                        		}
+	                        	});
+	                        	
+	                        	AlertDialog FinalitzarDialog = builderFinalitzar.create();
+	                        	FinalitzarDialog.show();
 								break;
 							case 3:
 								if (pomodoroTerminat)
@@ -164,12 +162,10 @@ public class RestTimeActivity extends Activity {
 								startActivity(menu);
 								finish();
 								break;
-							}
 						}
-
-					});
-
-			AlertDialog ad = pomodoroOverMenu.create();
+					}
+				});
+			AlertDialog ad = restOverMenu.create();
 			ad.show();			
 		}
 	};
