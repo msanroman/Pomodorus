@@ -4,7 +4,8 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@drawable/radialback" >
-
+
+
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
@@ -60,21 +61,24 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>
-
+
+
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
             android:layout_marginLeft="25dp">
-
+
+
         <Button
             android:id="@+id/OauthButton"
             android:layout_width="110dp"
             android:layout_height="fill_parent"
 	        android:onClick="onOauthTwitterClick"
-            android:text="Oauth Twitter"
-            android:background="@drawable/fancy_button" />
+			android:background="@drawable/fancy_button"
+            android:text="Log In Twitter" />
+
 
         <Button
             android:id="@+id/EsborrarButton"
