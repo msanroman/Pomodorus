@@ -81,7 +81,7 @@ public class LogInTwitterActivity extends Activity{
         		web.loadUrl(AppTwitter.ObtenirUrlAutoritzacio());
 			} catch(TwitterException e) {}
        	}
-    	else missatge.setText("Ja estas logejat!");
+    	else missatge.setText("Ja estas loguejat!");
     }
     
     public void onEsborrarCredencialsClick(View button) {
@@ -91,6 +91,6 @@ public class LogInTwitterActivity extends Activity{
 		    estatTwitter.setText("Desconectat");
 		    missatge.setText("Credencials esborrades!");
     	}
-    	else missatge.setText("No estas logejat!");
+    	else missatge.setText("No estas loguejat!");
     }
 }
