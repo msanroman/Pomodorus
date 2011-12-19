@@ -9,24 +9,29 @@
         android:id="@+id/textViewCrearCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
         android:text="Nom de la categoria:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/NomCrearCategoria"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
         <requestFocus />
     </EditText>
 
     <Button
         android:id="@+id/CrearCategoriaButton"
-        android:layout_width="194dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:onClick="crearCategoria"
         android:text="Crear categoria"
         android:background="@drawable/fancy_button" />
