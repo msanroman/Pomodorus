@@ -3,11 +3,13 @@ package org.gps.pomodorus;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
-public class CatTaskTabActivity extends TabActivity {
+public class CatTaskTabActivity extends TabActivity implements OnTabChangeListener {
     static private TabHost mTabHost;
     private Resources mResources;
     
@@ -24,7 +26,14 @@ public class CatTaskTabActivity extends TabActivity {
         addTabTotes();
         addTabPendents();
         addTabCompletades();
-        mTabHost.setCurrentTab(0);  
+        mTabHost.setOnTabChangedListener(this);
+        mTabHost.setCurrentTab(0);
+        mTabHost.setBackgroundColor(Color.parseColor("#493733"));
+        for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
+            mTabHost.getTabWidget().getChildAt(i).setBackgroundColor(
+                    Color.parseColor("#493733"));
+        }
+        mTabHost.getTabWidget().getChildAt(0).setBackgroundColor(Color.parseColor("#ff5224"));
     }
     
     private void addTabTotes() {
@@ -56,4 +65,15 @@ public class CatTaskTabActivity extends TabActivity {
          spec.setContent(intent);
          mTabHost.addTab(spec);
      }
+    
+    public void onTabChanged(String tabId) {
+        
+        for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
+            mTabHost.getTabWidget().getChildAt(i).setBackgroundColor(
+                    Color.parseColor("#493733"));
+        }
+        mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab())
+                .setBackgroundColor(Color.parseColor("#ff5224"));
+     
+    }
 }
