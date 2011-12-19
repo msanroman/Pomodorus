@@ -3,12 +3,9 @@ package org.gps.pomodorus;
 import org.gps.databases.TaskDbAdapter;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -29,16 +26,13 @@ public class PomodoroActivity extends Activity implements
 	private int remainingTime = 0;
 	private MediaPlayer pomodoroTicking;
 	private MediaPlayer alarmRinging;
-	private Handler handler = new Handler();
 	private boolean finishedPomodoro;
 	private long id;
 	private String name;
 	private String description;
 	private int totalPomodoros;
 	private int remainingPomodoros;
-	private static final CharSequence[] items = { "Twittejar últim pomodoro",
-			"Començar descans", "Extendre pomodoros" };
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
