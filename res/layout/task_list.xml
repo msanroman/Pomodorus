@@ -12,6 +12,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginLeft="20dp"
         android:text="Tasques"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     
     <ListView
@@ -29,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="20dp"
-        android:text="@string/no_todos" />
+        android:text="@string/no_todos"
+        android:textColor="#fff" />
 
 </LinearLayout>

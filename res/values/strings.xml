@@ -2,7 +2,8 @@
 <resources>
     <string name="hello">Hello World, Todo!</string>
     <string name="app_name">Pomodorus</string>
-    <string name="no_todos">Currently there are no tasks in your database</string>
+    <string name="no_todos">No hi ha cap tasca a la base de dades</string>
+    <string name="no_todos_cat">No hi ha cap categoria a la base de dades</string>
     <string name="menu_insert">Add Item</string>
     <string name="menu_delete">Delete Todo</string>
     <string name="todo_summary">Summary</string>
