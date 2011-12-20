@@ -12,6 +12,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="25dp"
         android:text="Nom de la categoria:"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -34,6 +35,7 @@
         android:layout_marginRight="60dp"
         android:onClick="crearCategoria"
         android:text="Crear categoria"
+        android:textColor="#fff"
         android:background="@drawable/fancy_button" />
 
 </LinearLayout>

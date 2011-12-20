@@ -16,6 +16,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:text="Nom de la tasca:"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -37,6 +38,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:text="Número de pomodoros:"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -56,6 +58,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:text="Descripció:"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -76,6 +79,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:text="Assignar categories a la tasca: "
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
@@ -87,6 +91,7 @@
         android:layout_marginRight="25dp"
         android:onClick="onCategoryClick"
         android:text="Categories"
+        android:textColor="#fff"
         android:background="@drawable/fancy_button" />
 
     <Button
@@ -100,6 +105,7 @@
         android:layout_marginRight="70dp"
         android:onClick="crearTasca"
         android:text="Crear tasca"
+        android:textColor="#fff"
         android:background="@drawable/fancy_button" />
 	
 </LinearLayout>

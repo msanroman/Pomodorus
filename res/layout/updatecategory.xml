@@ -9,14 +9,19 @@
         android:id="@+id/textViewActualitzarCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
         android:text="Nom de la categoria:"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/NomActualitzarCategoria"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp" >
 
         <requestFocus />
     </EditText>
@@ -29,6 +34,7 @@
         android:layout_marginTop="40dp"
         android:onClick="actualitzarCategoria"
         android:text="Actualitzar categoria"
+        android:textColor="#fff"
         android:background="@drawable/fancy_button" />
 
 </LinearLayout>

@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Large Text"
+            android:textColor="@color/TitlesDetail"
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
         <TextView
@@ -47,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dip"
             android:text=" remaining"
+            android:textColor="@color/TitlesDetail"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
     <LinearLayout
@@ -60,6 +62,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:text="Medium Text"
+	        android:textColor="@color/TitlesDetail"
 	        android:paddingTop="10dip"
 	        android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
@@ -81,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Pomodoro"
+        android:textColor="#fff"
         android:background="@drawable/fancy_button" />
     </LinearLayout>
 

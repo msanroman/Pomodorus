@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" 
@@ -9,14 +12,20 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:text="Nom de la tasca:"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/NomActualitzarTasca"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" 
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp" >
 
         <requestFocus />
     </EditText>
@@ -26,13 +35,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:text="Número de pomodoros:"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/NumeroActualitzarTasca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:inputType="number" />
 
     <TextView
@@ -40,7 +55,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:text="Descripció:"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -48,6 +66,9 @@
         android:layout_width="match_parent"
         android:layout_height="111dp"
         android:layout_weight="0.00"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:inputType="textMultiLine" />
 
     <TextView
@@ -55,15 +76,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:text="Categories assignades: "
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id="@+id/categoriesModif"
         android:layout_width="126dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:onClick="onCategoryModifClick"
         android:text="Categories"
+        android:textColor="#fff"
         android:background="@drawable/fancy_button" />
 
     <Button
@@ -72,8 +100,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
         android:onClick="actualitzarTasca"
         android:text="Actualitzar tasca"
+        android:textColor="#fff"
         android:background="@drawable/fancy_button" />
 
 </LinearLayout>
+</ScrollView>

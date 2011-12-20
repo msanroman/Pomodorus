@@ -24,6 +24,7 @@
             android:layout_marginTop="30dp"
         	android:layout_marginLeft="25dp"
             android:text="Compte de Twitter: "
+            android:textColor="@color/TitlesDetail"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -49,6 +50,7 @@
             android:layout_marginTop="30dp"
         	android:layout_marginLeft="25dp"
             android:text="Estat: "
+            android:textColor="@color/TitlesDetail"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -76,6 +78,7 @@
             android:layout_width="110dp"
             android:layout_height="fill_parent"
 	        android:onClick="onOauthTwitterClick"
+        	android:textColor="#fff"
 			android:background="@drawable/fancy_button"
             android:text="Log In Twitter" />
 
@@ -87,6 +90,7 @@
             android:layout_marginLeft="45dp"
             android:onClick="onEsborrarCredencialsClick"
             android:text="Esborrar Credencials"
+        	android:textColor="#fff"
             android:background="@drawable/fancy_button" />
 
     </LinearLayout>

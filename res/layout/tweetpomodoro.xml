@@ -9,14 +9,19 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
         android:text="Text del Tweet: (màxim 140 caracters)"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 	<EditText
         android:id="@+id/Tweet"
         android:layout_width="match_parent"
         android:layout_height="111dp"
         android:layout_weight="0.00"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:inputType="textMultiLine" />
 
 	<LinearLayout
@@ -28,13 +33,18 @@
 		    android:id="@+id/textView41"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
+		    android:layout_marginTop="30dp"
+       		android:layout_marginLeft="20dp"
 		    android:text="Caracters restants: "
+		    android:textColor="@color/TitlesDetail"
 		    android:textAppearance="?android:attr/textAppearanceMedium" />
 
 		<TextView
 		    android:id="@+id/caracters"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
+		    android:layout_marginTop="30dp"
+        	android:layout_marginLeft="20dp"
 		    android:text=""
 		    android:textAppearance="?android:attr/textAppearanceMedium" />
 

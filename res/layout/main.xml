@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<LinearLayout 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" 
@@ -9,7 +13,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal" >
 	    
@@ -25,9 +29,10 @@
         android:id="@+id/GestioTasques"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:text="Gestió Tasques"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="fill_parent"
@@ -42,7 +47,8 @@
 	        android:layout_marginTop="10dp"
 	        android:background="@drawable/fancy_button"
 	        android:onClick="onCrearTascaClick"
-	        android:text="Crear tasca" />
+	        android:text="Crear tasca"
+	        android:textColor="#fff" />
 	
 	    <Button
 	        android:id="@+id/LlistarTasquesMain"
@@ -52,7 +58,8 @@
 	        android:layout_marginTop="10dp"
 	        android:background="@drawable/fancy_button"
 	        android:onClick="onLlistarTasquesClick"
-	        android:text="Llistar tasques" />
+	        android:text="Llistar tasques"
+	        android:textColor="#fff" />
 	    </LinearLayout>
 
     <TextView
@@ -62,6 +69,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:text="Gestió Categories"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     
     
@@ -78,7 +86,8 @@
 	        android:layout_marginTop="10dp"
 	        android:background="@drawable/fancy_button"
 	        android:onClick="onCrearCategoriaClick"
-	        android:text="Crear categoria" />
+	        android:text="Crear categoria"
+	        android:textColor="#fff" />
 	    
 	    
 	    <Button
@@ -89,7 +98,8 @@
 	        android:layout_marginTop="10dp"
 	        android:background="@drawable/fancy_button"
 	        android:onClick="onLlistarCategoriesClick"
-	        android:text="Llistar Categories" />
+	        android:text="Llistar Categories"
+	        android:textColor="#fff" />
 	</LinearLayout>
     <TextView
         android:id="@+id/Social"
@@ -98,11 +108,13 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:text="Social"
+        android:textColor="@color/TitlesDetail"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="30dp"
 	    android:orientation="horizontal" >
         
 	    <Button
@@ -113,25 +125,20 @@
 	        android:layout_marginTop="10dp"
 	        android:background="@drawable/fancy_button"
 	        android:onClick="onLogInTwitterClick"
-	        android:text="Login Twitter" />
-	
-	    <Button
-	        android:id="@+id/SobreNosaltresMain"
+	        android:text="Login Twitter"
+	        android:textColor="#fff" />
+		<Button
+	        android:id="@+id/FillDatabaseTest"
 	        android:layout_width="140dp"
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="10dp"
 	        android:layout_marginTop="10dp"
-	        android:background="@drawable/fancy_button"
-	        android:text="Sobre nosaltres" />
-	</LinearLayout>
-	<Button
-	        android:id="@+id/FillDatabaseTest"
-	        android:layout_width="60dp"
-	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="20dp"
-	        android:layout_marginTop="5dp"
-	        android:layout_marginBottom="5dp"
 	        android:onClick="onFillDatabaseTest"
 	        android:background="@drawable/fancy_button"
+	        android:textColor="#fff"
 	        android:text="Fill DB" />
+	    
+	</LinearLayout>
+	
 </LinearLayout>
+</ScrollView>
